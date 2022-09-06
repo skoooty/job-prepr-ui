@@ -12,6 +12,7 @@ import threading
 import pandas as pd
 from random import randint
 
+
 RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
 
 lock = threading.Lock()
@@ -62,6 +63,8 @@ def get_rand_question(questions, job_name):
     index=randint(0, no_of_q-1)
     return questions["Question"].iloc[index]
 
+language = 'en'
+
 def main():
     questions=load_questions()
     job_list = questions["Area"].unique()
@@ -70,11 +73,15 @@ def main():
         job_name = st.selectbox("Select the job that you are applying for:", job_list)
     st.title("How confident are you?")
     st.write(f"Let's practice for your {job_name} interview.")
-    playing = st.checkbox("Start the session.", value=False)
+    playing = st.checkbox("Start a new session.", value=False)
+    analysing=False
 
     if playing:
-        question=get_rand_question(questions, job_name)
-        st.write(question)
+        st.session_state["frames"]=[]
+        if 'question' not in st.session_state or st.session_state["question"] == None:
+            st.session_state['question'] = get_rand_question(questions, job_name)
+        st.write(st.session_state['question'])
+
         webrtc_streamer(
             key="object-detection",
             video_frame_callback=VideoProcessor.video_frame_callback,
@@ -87,6 +94,7 @@ def main():
 
     if 'frames' not in st.session_state:
         st.session_state['frames'] = img_container["frames"]
+
     if 'all_faces' not in st.session_state:
         st.session_state['all_faces'] = []
 
@@ -99,8 +107,15 @@ def main():
         frames=frames[::15]
         if len(frames):
             st.write(f"We've collected {len(frames)} frames...")
+            analysing=True
         for frame in frames:
             st.image(frame)
+        if analysing:
+            st.button("Get the report")
+        st.session_state["question"] = None
+
+
+
 
 if __name__ == "__main__":
     main()
