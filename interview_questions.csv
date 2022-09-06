@@ -1,0 +1,211 @@
+﻿Area;Question
+Data science;Mention the differences between Data Mining and Data Profiling?
+Data science;What are the various steps involved in any analytics project?
+Data science;Define the term 'Data Wrangling in Data Analytics.
+Data science;What are the common problems that data analysts encounter during analysis?
+Data science;Which are the technical tools that you have used for analysis and presentation purposes?
+Data science;What are the best methods for data cleaning?
+Data science;What is the significance of Exploratory Data Analysis (EDA)?
+Data science;Explain descriptive, predictive, and prescriptive analytics.
+Data science;What are the different types of sampling techniques used by data analysts?
+Data science;Describe univariate, bivariate, and multivariate analysis.
+Data science;How can you handle missing values in a dataset?
+Data science; Explain the term Normal Distribution.
+Data science;What is Time Series analysis?
+Data science;How is Overfitting different from Underfitting?
+Data science;How do you treat outliers in a dataset? 
+Data science;What are the different types of Hypothesis testing?
+Data science;Explain the Type I and Type II errors in Statistics?
+Data science;In Microsoft Excel, a numeric value can be treated as a text value if it precedes with what?
+Data science;What is the difference between COUNT, COUNTA, COUNTBLANK, and COUNTIF in Excel?
+Data science;How do you make a dropdown list in MS Excel?
+Data science;Can you provide a dynamic range in “Data Source” for a Pivot table?
+Data science;What is the function to find the day of the week for a particular date value
+Data science;How does the AND() function work in Excel?
+Data science;Explain how VLOOKUP works in Excel?
+Data science;What function would you use to get the current date and time in Excel?
+Data science;How do you subset or filter data in SQL?
+Data science;What is the difference between a WHERE clause and a HAVING clause in SQL?
+Data science;Is the below SQL query correct? If not, how will you rectify it?
+Data science;How are Union, Intersect, and Except used in SQL?
+Data science;What is a Subquery in SQL?
+Data science;How do you write a stored procedure in SQL?
+Data science;Write an SQL stored procedure to find the total even number between two users given numbers.
+Data science;How is joining different from blending in Tableau?
+Data science;What do you understand by LOD in Tableau?
+Data science;What are the different connection types in Tableau Software?
+Data science;What are the different joins that Tableau provides?
+Data science;What is a Gantt Chart in Tableau?
+Data science;What is the difference between Treemaps and Heatmaps in Tableau?
+Data science;What is the correct syntax for reshape() function in NumPy? 
+Data science;What are the different ways to create a data frame in Pandas?
+Data science;How can you add a column to a Pandas Data Frame?
+Data science;How will you print four random integers between 1 and 15 using NumPy?
+Data science;What are the differences between supervised and unsupervised learning?
+Data science;How is logistic regression done?
+Data science;Explain the steps in making a decision tree.
+Data science;How do you build a random forest model?
+Data science;How can you avoid overfitting your model?
+Data science;Differentiate between univariate, bivariate, and multivariate analysis.
+Data science;What are the feature selection methods used to select the right variables?
+Data science;You are given a data set consisting of variables with more than 30 percent missing values. How will you deal with them?
+Data science;What are dimensionality reduction and its benefits?
+Data science;How should you maintain a deployed model?
+Data science;What are recommender systems?
+Data science; How do you find RMSE and MSE in a linear regression model?
+Data science;How can you select k for k-means? 
+Data science;What is the significance of p-value?
+Data science;How can outlier values be treated?
+Data science;How can time-series data be declared as stationery?
+Data science;How can you calculate accuracy using a confusion matrix?
+Data science;'People who bought this also bought…' recommendations seen on Amazon are a result of which algorithm?
+Data science;You are given a dataset on cancer detection. You have built a classification model and achieved an accuracy of 96 percent. Why shouldn't you be happy with your model performance? What can you do about it?
+Data science;We want to predict the probability of death from heart disease based on three risk factors: age, gender, and blood cholesterol level. What is the most appropriate algorithm for this case?
+Data science;After studying the behavior of a population, you have identified four specific individual types that are valuable to your study. You would like to find all users who are most similar to each individual type. Which algorithm is most appropriate for this study?
+Data science;Your organization has a website where visitors randomly receive one of two coupons. It is also possible that visitors to the website will not receive a coupon. You have been asked to determine if offering a coupon to website visitors has any impact on their purchase decisions. Which analysis method should you use?
+Data science;What do you understand about true positive rate and false-positive rate?
+Data science;What is the ROC curve?
+Data science;What is a Confusion Matrix?
+Data science;What do you understand about the true-positive rate and false-positive rate?
+Data science;How is Data Science different from traditional application programming?
+Data science;What is the difference between the long format data and wide format data?
+Data science;Mention some techniques used for sampling. What is the main advantage of sampling?
+Data science;Why is Python used for Data Cleaning in DS?
+Data science;What are the popular libraries used in Data Science?
+Data science;What is variance in Data Science?
+Data science;What is pruning in a decision tree algorithm?
+Data science;What is entropy in a decision tree algorithm?
+Data science;What information is gained in a decision tree algorithm?
+Data science;What is k-fold cross-validation?
+Data science;What is a normal distribution?
+Data science;What is Deep Learning?
+Data science;What is an RNN (recurrent neural network)?
+Data science;What are the feature vectors?
+Data science;What are the steps in making a decision tree?
+Data science;What is root cause analysis?
+Data science;What is logistic regression?
+Data science;What are recommender systems?
+Data science;Explain cross-validation.
+Data science;What is collaborative filtering?
+Data science;Do gradient descent methods always converge to similar points?
+Data science;What is the goal of A/B Testing?
+Data science;What are the drawbacks of the linear model?
+Data science;What is the law of large numbers?
+Data science;What are the confounding variables?
+Data science;What is star schema?
+Data science;How regularly must an algorithm be updated?
+Data science;What are eigenvalue and eigenvector?
+Data science;Why is resampling done?
+Data science;What is selection bias?
+Data science;What are the types of biases that can occur during sampling?
+Data science;What is survivorship bias?
+Data science;How do you work towards a random forest?
+Data science;What is a bias-variance trade-off?
+Data science;Describe Markov chains?
+Data science;Why is R used in Data Visualization?
+Data science;What is the difference between a box plot and a histogram?
+Data science;What does NLP stand for?
+Data science;Difference between an error and a residual error
+Data science;Difference between Normalisation and Standardization
+Data science;Difference between Point Estimates and Confidence Interval
+Data science;Which is your favorite machine learning algorithm and why?
+Data science;Which according to you is the most important skill that makes a good data scientist?
+Data science;Why do you think data science is so popular today?
+Data science;Explain the most challenging data science project that you worked on
+Data science;How do you usually prefer working on a project - individually, small team, or large team?
+Data science;Based on your experience in the industry, tell me about your top 5 predictions for the next 10 years
+Data science;What are some unique skills that you can bring to the team as a data scientist?
+Data science;Were you always in the data science field? If not, what made you change your career path and how did you upgrade your skills? 
+Data science;If we give you a random data set, how will you figure out whether it suits the business needs or not?
+Data science;Given a chance, if you could pick a career other than being a data scientist, what would you choose?
+Data science;Given the constant change in the data science field, how quickly can you adapt to new technologies?
+Data science;Have you ever been in a conflict with your colleagues regarding different strategies to go about a project? How were you able to resolve it?
+Data science;Can you break down an algorithm you have used on a recent project?
+Data science;What tools did you use in your last project and why?
+Data science;Think of the last technical problem that you solved. If you had no limitations with the project’s budget, what would be the first thing you would do to solve the same problem?
+Data science;When you are assigned multiple projects at the same time, how best do you organize your time? 
+Data science;Tell me about a time when your project didn’t go according to plan and what you learned from it
+Data science;Have you ever created an original algorithm? How did you go about doing that and for what purpose?
+Data science;What is your most favored strategy to clean a big data set and why?
+Data science;Do you contribute to any open source projects?
+Programming;How are Network types classified?
+Programming;Explain different types of networks.
+Programming;Explain LAN (Local Area Network)
+Programming;Tell me something about VPN (Virtual Private Network)
+Programming;What are the advantages of using a VPN?
+Programming;What are the different types of VPN?
+Programming;What are nodes and links?
+Programming;What is the network topology?
+Programming;Define different types of network topology
+Programming;What is an IPv4 address? What are the different classes of IPv4?
+Programming;What are Private and Special IP addresses?
+Programming;Describe the OSI Reference Model
+Programming;Define the 7 different layers of the OSI Reference Model
+Programming;Describe the TCP/IP Reference Model
+Programming;Define the 4 different layers of the TCP/IP Reference Model
+Programming;Differentiate OSI Reference Model with TCP/IP Reference Model
+Programming;What are the HTTP and the HTTPS protocol?
+Programming;What is the SMTP protocol?
+Programming;What is the DNS?
+Programming;What is the use of a router and how is it different from a gateway?
+Programming;What is the TCP protocol?
+Programming;What is the UDP protocol?
+Programming;Compare between TCP and UDP
+Programming;What is the ICMP protocol?
+Programming;What do you mean by the DHCP Protocol?
+Programming;What is the ARP protocol?
+Programming;What is the FTP protocol?
+Programming;What is the MAC address and how is it related to NIC?
+Programming;Differentiate the MAC address with the IP address
+Programming;What is a subnet?
+Programming;Compare the hub vs switch
+Programming;What is the difference between the ipconfig and the ifconfig?
+Programming;What is the firewall?
+Programming;What are Unicasting, Anycasting, Multicasting and Broadcasting?
+Programming;What happens when you enter google.com in the web browser?
+Programming;Please explain what you understand by computer programming.
+Programming; Can you enumerate and explain the various types of errors that can occur during the execution of a computer program?
+Programming;Please explain an algorithm. What are some of its important features?
+Programming;What do you understand by maintaining and updating a computer program?
+Programming;Please provide a brief explanation on variables.
+Programming;Every programming language has reserved words. What are they? Give some examples.
+Programming;What do you understand by loops? Briefly explain the various types of loops.
+Programming;Please explain program documentation. Why is it important?
+Programming;What are constants? Explain their types.
+Programming;Please explain the operators.
+Programming;Could you explain arrays?
+Programming;What do you understand by a subroutine?
+Programming;Explain low-level and high-level programming languages. Also, give some examples.
+Programming;What do you understand by machine code?
+Programming;Do you know about modeling languages? Give some examples.
+Programming;Please explain software testing. Why do we need it?
+Programming;What do you mean by “beta version” of a computer program?
+Programming;Can you explain the top-down design approach?
+Programming; What do you understand by program implementation?
+Programming;Please explain program execution.
+Programming;What is a compiler?
+Programming; What is debugging? How is it related to testing?
+Programming;Why do adding comments to code is highly recommended?
+Programming;Can you enumerate some coding best practices?
+Programming;Can you please explain the DRY principle?
+Programming;What are the violations of the DRY principle called? Where are they found typically?
+Programming;Please explain bubble sorting?
+Programming;Please explain data structures.
+Programming;What are some of the areas that leverage data structures?
+Programming;What do you understand by sorting? Name some popular sorting techniques.
+Programming;Please explain the binary search. What is the best scenario for using a binary search?
+Programming;How will you reference all elements in a one-dimensional array?
+Programming;What do you understand by LIFO and FIFO?
+Programming;Can you explain multi-dimensional array?
+Programming;Please explain a graph.
+Programming;What is the difference between a linear and a non-linear data structure?
+Programming;Please explain an AVL tree.
+Programming;Why do we use Huffman’s algorithm?
+Programming; Please explain Fibonacci search.
+Programming;How does the recursive algorithm works?
+Programming;What is a recursive function?
+Programming;Please explain how does dynamic memory allocation help in managing data?
+Programming;What is the difference between NULL and VOID?
+Programming;Please explain how variable declaration affects memory allocation.
+Programming;Please explain data abstraction.
+Programming;Why String is final in Java?
