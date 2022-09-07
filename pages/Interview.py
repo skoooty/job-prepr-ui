@@ -25,7 +25,6 @@ url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict"
 language = 'en'
 
 result = {}
-xxx="MMM"
 
 y_label_dict = {
     'angry':0,
@@ -150,7 +149,8 @@ def main():
 
         st.session_state["question"] = None
     st.write(result)
-    xxx="DDD"
+    st.session_state["result"]=result
+
 
 if __name__ == "__main__":
     main()
