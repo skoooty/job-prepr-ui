@@ -15,6 +15,9 @@ from random import randint
 import requests
 import json
 from aiortc.contrib.media import MediaRecorder
+import imageio
+
+
 
 RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
 
@@ -25,17 +28,6 @@ url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict"
 language = 'en'
 
 result = {}
-
-y_label_dict = {
-    'angry':0,
-    'disgust':1,
-    'fear':2,
-    'happy':3,
-    'neutral':4,
-    'sad':5,
-    'surprise':6
-}
-
 
 def recorder_factory():
     return MediaRecorder("record.mp3")
@@ -142,14 +134,14 @@ def main():
                 #st.image(frame)
                 emotion=requests.post(url_api_face_rec,json=json.dumps(frame.tolist())).json()[0]
                 emotions.append(emotion)
-            for i,v in enumerate(frames):
-                result[i] = {"Frame": v, "Emotions": emotions[i]}
-            #st.write(result)
-
+            result={"Frames": frames, "Emotions": emotions}
+            st.session_state["result"]=result
+            st.markdown("We have analysed your response.\n Go to the **Result** page to check it out :)")
+            im = imageio.imread('rep_pg.png')
+            st.image(im)
 
         st.session_state["question"] = None
-    st.write(result)
-    st.session_state["result"]=result
+
 
 
 if __name__ == "__main__":
