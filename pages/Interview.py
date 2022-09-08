@@ -1,6 +1,5 @@
 import streamlit as st
 from streamlit_webrtc import (
-    RTCConfiguration,
     VideoProcessorBase,
     webrtc_streamer,
     VideoHTMLAttributes
@@ -18,16 +17,15 @@ from aiortc.contrib.media import MediaRecorder
 import imageio
 
 
-
-RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
-
-
 lock = threading.Lock()
 img_container = {"frames":[]}
 url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict"
 language = 'en'
-
 result = {}
+interview_questions='interview_questions.csv'
+frame_rate=15
+resolution=48
+
 
 def recorder_factory():
     return MediaRecorder("record.mp3")
@@ -45,12 +43,12 @@ class VideoProcessor(VideoProcessorBase):
 
 def find_face(image):
     try:
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        image1 = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
 
         faces = face_cascade.detectMultiScale(
-                                                image,
+                                                image1,
                                                 scaleFactor=1.3,
                                                 minNeighbors=3,
                                                 minSize=(30, 30)
@@ -58,13 +56,14 @@ def find_face(image):
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
             just_face = image[y:y + h, x:x + w]
-            just_face=np.array(Image.fromarray(just_face).resize((48,48)))
+            just_face=np.array(Image.fromarray(just_face)
+            )
             return just_face
     except:
         return None
 
 def load_questions():
-    questions = pd.read_csv('interview_questions.csv',
+    questions = pd.read_csv(interview_questions,
                             header=0,
                             names=["Area", "Question"],
                             on_bad_lines='skip',
@@ -96,6 +95,7 @@ def main():
             st.session_state['question'] = get_rand_question(questions, job_name)
         st.write(st.session_state['question'])
 
+
         webrtc_streamer(
             key="object-detection",
             video_frame_callback=VideoProcessor.video_frame_callback,
@@ -116,26 +116,25 @@ def main():
         if len(st.session_state['photo_frames']) < 1:
             st.session_state['photo_frames'] = img_container["frames"]
 
-
     if 'all_faces' not in st.session_state:
         st.session_state['all_faces'] = []
 
     if not playing:
 
-        frames=st.session_state["photo_frames"]
-        frames=frames[::15]
+        full_frames=st.session_state["photo_frames"]
+        frames=full_frames[::frame_rate]
         if len(frames):
-            #st.write(f"We've collected {len(frames)} frames...")
             analysing=True
         if analysing:
             emotions=[]
             for frame in frames:
-                frame=frame.reshape(48,48,1)
-                #st.image(frame)
-                emotion=requests.post(url_api_face_rec,json=json.dumps(frame.tolist())).json()[0]
+                frame_res=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
+                emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
                 emotions.append(emotion)
             result={"Frames": frames, "Emotions": emotions}
             st.session_state["result"]=result
+            st.header("Amazing!")
             st.markdown("We have analysed your response.\n Go to the **Result** page to check it out :)")
             im = imageio.imread('rep_pg.png')
             st.image(im)
