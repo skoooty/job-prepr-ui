@@ -128,7 +128,7 @@ def main():
             #Message to the user
             st.header("Amazing!")
             st.markdown("We have analysed your response.\n Go to the **Result** page to check it out :)")
-            im = imageio.imread('rep_pg.png')
+            im = imageio.imread('screenshots/rep_pg.png')
             st.image(im)
             st.markdown("...or start a new session.")
 
