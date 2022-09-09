@@ -1,0 +1,7 @@
+.css-1dm0a9e.Mui-disabled > button {
+	color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0);
+	box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+  visibility: hidden;
+
+}
