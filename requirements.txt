@@ -6,7 +6,7 @@ numpy
 opencv-python
 pandas
 requests
-aiortc-contrib-media
+aiortc
 seaborn
 matplotlib
 google-cloud
