@@ -1,3 +1,5 @@
+from multiprocessing.resource_sharer import stop
+from tkinter.tix import ButtonBox
 import streamlit as st
 from streamlit_webrtc import (
     VideoProcessorBase,
@@ -15,6 +17,7 @@ import requests
 import json
 from aiortc.contrib.media import MediaRecorder
 import imageio
+import time
 
 
 lock = threading.Lock()
@@ -25,6 +28,7 @@ result = {}
 interview_questions='interview_questions.csv'
 frame_rate=15
 resolution=48
+s_per_question=60
 
 
 def recorder_factory():
@@ -77,6 +81,7 @@ def get_rand_question(questions, job_name):
     return questions["Question"].iloc[index]
 
 def main():
+    #st.set_page_config()
     questions=load_questions()
     job_list = questions["Area"].unique()
 
@@ -84,17 +89,19 @@ def main():
         st.title('Area Selection')
         job_name = st.selectbox("Select the job that you are applying for:", job_list)
     st.title("How confident are you?")
-    st.write(f"Let's practice for your {job_name} interview.")
-    playing = st.checkbox("Start a new session.", value=False)
+    st.markdown(f"Let's practice for your {job_name} interview.")
+    st.markdown(f"You have {s_per_question}s to answer the question that will pop up on the screen.")
+    st.markdown(f"**Good luck!**")
+    playing = st.checkbox("Start/Stop", value=False)
     analysing=False
 
     if playing:
+
         st.session_state["photo_frames"]=[]
 
         if 'question' not in st.session_state or st.session_state["question"] == None:
             st.session_state['question'] = get_rand_question(questions, job_name)
-        st.write(st.session_state['question'])
-
+        st.subheader(st.session_state['question'])
 
         webrtc_streamer(
             key="object-detection",
@@ -105,8 +112,10 @@ def main():
             },
             desired_playing_state=playing
             , in_recorder_factory=recorder_factory
-            , video_html_attrs = VideoHTMLAttributes(muted=True, volume=0, autoPlay=True, controls=False)
+            , video_html_attrs = VideoHTMLAttributes(muted=True, volume=0, autoPlay=True, controls=False, stop=False)
+            ,
         )
+
         print(img_container)
 
     if 'photo_frames' not in st.session_state:
@@ -115,6 +124,14 @@ def main():
     else:
         if len(st.session_state['photo_frames']) < 1:
             st.session_state['photo_frames'] = img_container["frames"]
+
+    if playing:
+        ph = st.empty()
+        for secs in range(s_per_question,0,-1):
+            mm, ss = secs//60, secs%60
+            ph.metric("", f"{mm:02d}:{ss:02d}")
+            time.sleep(1)
+        playing=False
 
     if 'all_faces' not in st.session_state:
         st.session_state['all_faces'] = []
@@ -138,6 +155,7 @@ def main():
             st.markdown("We have analysed your response.\n Go to the **Result** page to check it out :)")
             im = imageio.imread('rep_pg.png')
             st.image(im)
+            st.markdown("...or start a new session.")
 
         st.session_state["question"] = None
 
