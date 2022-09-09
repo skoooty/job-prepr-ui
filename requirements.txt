@@ -10,4 +10,3 @@ aiortc
 seaborn
 matplotlib
 google-cloud
-io
