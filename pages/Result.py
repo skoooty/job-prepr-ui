@@ -4,6 +4,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from google.cloud import speech_v1p1beta1 as speech
+from google.oauth2 import service_account
 import io
 import requests
 
@@ -16,6 +17,12 @@ emotinos_names = [
         'neutral',
         'sad',
         'surprised']
+
+# Create API client.
+
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
 
 def show_strongest_emotion(emotions):
     strongest_emotion={"Emotion":"angry", "Perc": 0}
@@ -152,7 +159,7 @@ def transcribe(source):
     audio_channel_count=1,
     enable_automatic_punctuation=True
     )
-    client = speech.SpeechClient()
+    client = speech.SpeechClient(credentials=credentials)
     response = client.recognize(config=config, audio=audio)
     best_alternative = speech.SpeechRecognitionAlternative()
     for result in response.results:
