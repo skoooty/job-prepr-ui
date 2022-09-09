@@ -71,7 +71,7 @@ def show_emotion_graph(emotions, result):
             if emotions[emotion].mean()>emotions[strong_emotion].mean() and emotion not in strongest_emotions:
                 strongest_emotions[index]=emotion
 
-    #Sorting strongest emotions
+    #Sorting strongest emotions + resizing
     for i, strong_emotion1 in enumerate(strongest_emotions):
         for j, strong_emotion2 in enumerate(strongest_emotions):
             if i<j:
@@ -79,6 +79,7 @@ def show_emotion_graph(emotions, result):
                     k=strongest_emotions[i]
                     strongest_emotions[i]=strongest_emotions[j]
                     strongest_emotions[j]=k
+
 
     st.markdown(f"You also seemed quite **{strongest_emotions[1]}** and **{strongest_emotions[2]}**.")
     columns = st.columns(no_columns)
@@ -182,34 +183,38 @@ def main():
         show_strongest_emotion(emotions)
         show_emotion_graph(emotions, result)
 
+        #Voice
         st.write(" ")
         st.write(" ")
         st.write("🗣️ Let's analyse what you said...")
 
         transcription=transcribe("record.mp3")
-        st.markdown(f"You said:")
-        st.markdown(f"""{transcription}""")
 
-        response = requests.get(f'https://npapi-lbzgzaglla-ew.a.run.app/predictnlp?text={transcription}').json()[0]
+        if transcription:
+            st.markdown(f"You said:")
+            st.markdown(f"""{transcription}""")
 
-        score=round(response["score"]*100)
-        if response["label"]=="POSITIVE":
-            if score>50:
-                st.header(f'Wow! You sounded {score}% **positive**! 😄')
-                st.write("Keep it up!")
-            else:
-                st.header(f'You sounded {score}% **positive**.')
-                st.write("You might want to use more positive words.")
+            response = requests.get(f'https://npapi-lbzgzaglla-ew.a.run.app/predictnlp?text={transcription}').json()[0]
+
+            score=round(response["score"]*100)
+            if response["label"]=="POSITIVE":
+                if score>50:
+                    st.header(f'Wow! You sounded {score}% **positive**! 😄')
+                    st.write("Keep it up!")
+                else:
+                    st.header(f'You sounded {score}% **positive**.')
+                    st.write("You might want to use more positive words.")
 
 
-        if response["label"]=="NEGATIVE":
-            if score>50:
-                st.header(f'Why so angry? You sounded {round(response["score"]*100)}% **negative**. 😡')
-                st.write("Next time, try using more positive words.")
-            else:
-                st.header(f'Upss... You sounded {round(response["score"]*100)}% **negative**.')
-                st.write("You might want to use more positive words.")
-
+            if response["label"]=="NEGATIVE":
+                if score>50:
+                    st.header(f'Why so angry? You sounded {round(response["score"]*100)}% **negative**. 😡')
+                    st.write("Next time, try using more positive words.")
+                else:
+                    st.header(f'Upss... You sounded {round(response["score"]*100)}% **negative**.')
+                    st.write("You might want to use more positive words.")
+        else:
+            st.markdown("Sorry, we couldn't hear you... Please record a new response.")
 
 
 
