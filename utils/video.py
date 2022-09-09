@@ -1,7 +1,7 @@
 import cv2
+import numpy as np
 from PIL import Image
 from multiprocessing.resource_sharer import stop
-import numpy as np
 
 def find_face(image):
     try:
