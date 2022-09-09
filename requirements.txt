@@ -1,6 +1,5 @@
 streamlit
 imageio
-multiprocessing-resource-sharer
 streamlit_webrtc
 PIL
 numpy
