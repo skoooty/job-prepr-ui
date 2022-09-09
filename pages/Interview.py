@@ -1,5 +1,4 @@
 from multiprocessing.resource_sharer import stop
-from tkinter.tix import ButtonBox
 import streamlit as st
 from streamlit_webrtc import (
     VideoProcessorBase,

@@ -1,6 +1,6 @@
 streamlit
 imageio
-tkinter-tix
+multiprocessing-resource-sharer
 streamlit_webrtc
 PIL
 numpy
