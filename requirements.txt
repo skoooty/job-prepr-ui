@@ -3,7 +3,7 @@ imageio
 streamlit_webrtc
 Pillow
 numpy
-cv2
+opencv-python
 pandas
 requests
 aiortc-contrib-media
