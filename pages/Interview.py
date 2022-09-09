@@ -112,7 +112,9 @@ def main():
             desired_playing_state=playing
             , in_recorder_factory=recorder_factory
             , video_html_attrs = VideoHTMLAttributes(muted=True, volume=0, autoPlay=True, controls=False, stop=False)
-            ,
+            ,  rtc_configuration={  # Add this config
+                                "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+                            }
         )
 
         print(img_container)
