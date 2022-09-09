@@ -9,4 +9,4 @@ requests
 aiortc
 seaborn
 matplotlib
-google-cloud
+google-cloud-speech
