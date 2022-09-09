@@ -1,2 +1,4 @@
 .streamlit/secrets.toml
 *.mp3
+.env
+.envrc
