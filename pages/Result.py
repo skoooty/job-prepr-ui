@@ -1,5 +1,3 @@
-from tkinter import font
-from turtle import color
 import streamlit as st
 from pages.Interview import result
 import pandas as pd
