@@ -1,22 +1,22 @@
 import streamlit as st
+import threading
+import requests
+import json
+import cv2
+import imageio
+import time
+import pathlib
+from aiortc.contrib.media import MediaRecorder
 from streamlit_webrtc import (
     VideoProcessorBase,
     webrtc_streamer,
     VideoHTMLAttributes
 )
-import threading
-import requests
-import json
-from streamlit_webrtc import (
-    VideoProcessorBase
-)
-import cv2
-from aiortc.contrib.media import MediaRecorder
-import imageio
-import time
 from utils.video import find_face
 from utils.questions import load_questions, get_rand_question
-import pathlib
+from utils.voice import recorder_factory
+
+
 
 #Defining the variables
 lock = threading.Lock()
@@ -26,10 +26,6 @@ result = {}
 frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 resolution=48 #e.g.48 means that the resolution is (48,48,1)
 s_per_question=60 #maximum duration of the video input in s
-
-#Saving the audio input
-def recorder_factory():
-    return MediaRecorder("record.mp3")
 
 #Extracting frames from the video input
 class VideoProcessor(VideoProcessorBase):
@@ -42,6 +38,10 @@ class VideoProcessor(VideoProcessorBase):
         with lock:
             if img is not None:
                 img_container["frames"].append(img)
+
+#Saving the audio input
+def recorder_factory():
+    return MediaRecorder("record.mp3")
 
 def main():
     #Button code

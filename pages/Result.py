@@ -1,9 +1,9 @@
 import streamlit as st
-from pages.Interview import result
 import pandas as pd
 import requests
 from utils.emotions import emotinos_names, show_strongest_emotion, show_emotion_graph
 from utils.voice import transcribe
+from pages.Interview import result
 
 def main():
     if "result" not in st.session_state:
@@ -58,15 +58,6 @@ def main():
         #If the text counldn't be extracted
         else:
             st.markdown("Sorry, we couldn't hear you... Please record a new response.")
-
-
-
-
-
-
-
-
-
 
 if __name__ == "__main__":
     main()

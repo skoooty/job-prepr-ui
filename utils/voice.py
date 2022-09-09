@@ -3,6 +3,7 @@ import io
 from google.cloud import speech_v1p1beta1 as speech
 from google.oauth2 import service_account
 
+
 #Connecting Google Cloud account
 credentials = service_account.Credentials.from_service_account_info(
     st.secrets["gcp_service_account"]
