@@ -10,3 +10,6 @@ aiortc
 seaborn
 matplotlib
 google-cloud-speech
+cloud-sql-python-connector
+sqlalchemy
+pg8000
