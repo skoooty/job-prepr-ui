@@ -1,6 +1,6 @@
 import sqlalchemy
 from db_connect import create_pool
-from db_password import hash_password
+from db_password import hash_password, check_password
 
 def create_new_user(email: str, password: str) -> None:
 
@@ -21,14 +21,14 @@ def login_user(email: str, password: str) -> bool:
     pool = create_pool()
 
     with pool.connect() as db_conn:
-        result = db_conn.execute("SELECT password, salt FROM users WHERE email = ?", (email)).fetchall()
+        result = db_conn.execute("SELECT password, salt FROM users WHERE email = %s", (email)).fetchall()
 
     if len(result) == 0:
-        return "User does not exist"
+        return "Invalid email or password"
 
     hashed_password, salt = result[0]
 
-    if hash_password(password, salt) == hashed_password:
-        return True
+    if check_password(password, salt, hashed_password):
+        return 'Login Successful'
 
-    return "Incorrect password"
+    return "Invalid email or password"
