@@ -1,6 +1,6 @@
 import streamlit as st
 import imageio
-from utils.db_queries import login_user, create_new_user, get_user_id
+from utils.db_queries import (login_user, create_new_user, get_user_id)
 
 def main():
     logged_in=False
