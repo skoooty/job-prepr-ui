@@ -1,7 +1,11 @@
 import streamlit as st
 import imageio
+from Home import logged_in
 
 def main():
+
+    logged_in=st.session_state["logged_in"]
+
     st.title("Let's set the room up for your interview!")
 
     #Quiet
@@ -46,9 +50,6 @@ def main():
     st.image(im)
     st.header("✅")
     st.write("Good! You're all set for the interview!")
-
-
-
 
 if __name__ == "__main__":
     main()

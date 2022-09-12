@@ -4,8 +4,11 @@ import requests
 from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_graph
 from utils.voice import transcribe
 from pages.Interview import result
+from Home import logged_in
 
 def main():
+    logged_in=st.session_state["logged_in"]
+
     if "result" not in st.session_state:
         st.write("Please go to the Interview page and record your response.")
     else:
@@ -27,11 +30,11 @@ def main():
         st.write(" ")
         st.write("🗣️ Let's analyse what you said...")
 
-        transcription=transcribe("record.mp3")
+        transcription, web_transcript = transcribe("record.mp3")
 
         if transcription:
-            st.markdown(f"You said:")
-            st.markdown(f"""{transcription}""")
+            st.markdown(f"Sample sentence you said:")
+            st.markdown(f"""{web_transcript}""")
 
             #Getting text from voice
             response = requests.get(f'https://npapi-lbzgzaglla-ew.a.run.app/predictnlp?text={transcription}').json()[0]

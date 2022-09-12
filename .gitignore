@@ -1,4 +1,42 @@
 .streamlit/secrets.toml
+.streamlit/secrets_MS.toml
+
 *.mp3
 .env
 .envrc
+
+job_prepr_ui/api/__pycache__/
+job_prepr_ui/ml_logic/__pycache__/
+mlruns/
+
+.env
+.env.yaml
+
+# System files
+.DS_Store
+.ipynb_checkpoints
+*.pyc
+*.swp
+build/
+dist/
+.coverage
+*.iml
+*.egg-info
+*.vscode
+
+# Data files
+.csv
+*.sqlite
+*.zip
+training_outputs/
+
+*.sublime-project
+*.sublime-workspace
+**/*.code-workspace
+
+.python_version
+nohup.out
+<<<<<<< HEAD
+**/__pycache__/
+=======
+>>>>>>> master

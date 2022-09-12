@@ -1,7 +1,10 @@
 import streamlit as st
 import imageio
+from Home import logged_in
 
 def main():
+    logged_in=st.session_state["logged_in"]
+
     st.title("How to use our app?")
     st.write("Our app will help you feel more confident at your next video interview. You'll get a chance to practice interview questions and we'll give you feedback for each interview you film.")
 
@@ -40,6 +43,7 @@ def main():
     st.markdown("* Once the result is generated, go to the **Result page**.")
     im = imageio.imread('screenshots/open_result.png')
     st.image(im)
+
 
 if __name__ == "__main__":
     main()
