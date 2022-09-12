@@ -3,11 +3,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from utils.general import is_loc_max_or_end
 
-emotinos_names = ['angry','disgusted','afraid','happy','neutral','sad','surprised']
+emotions_names = ['angry','disgusted','afraid','happy','neutral','sad','surprised']
 
 def show_strongest_emotion(emotions):
     strongest_emotion={"Emotion":"angry", "Perc": 0}
-    for emotion in emotinos_names:
+    for emotion in emotions_names:
         perc=round(emotions[emotion].mean()*100)
         if strongest_emotion["Perc"]<perc:
             strongest_emotion["Perc"]=perc
@@ -15,7 +15,7 @@ def show_strongest_emotion(emotions):
     st.header(f'You seemed mostly **{strongest_emotion["Emotion"]}** ({strongest_emotion["Perc"]}%).\n')
 
 def most_emotional_face(emotion, result):
-    emotion_index=emotinos_names.index(emotion)
+    emotion_index=emotions_names.index(emotion)
     index_most=0
     perc_most=0
     for i, v in enumerate(result["Emotions"]):
@@ -25,7 +25,7 @@ def most_emotional_face(emotion, result):
     return result["Frames"][index_most]
 
 def show_emotion_perc(emotions):
-    for emotion in emotinos_names:
+    for emotion in emotions_names:
         perc=round(emotions[emotion].mean()*100)
         st.write(f"You were **{perc}%** {emotion}.\n")
 
@@ -40,8 +40,8 @@ def show_emotion_graph(emotions, result):
     no_columns=3
 
     #Strongest emotions
-    strongest_emotions=emotinos_names[0:no_columns]
-    for emotion in emotinos_names:
+    strongest_emotions=emotions_names[0:no_columns]
+    for emotion in emotions_names:
         for index, strong_emotion in enumerate(strongest_emotions):
             if emotions[emotion].mean()>emotions[strong_emotion].mean() and emotion not in strongest_emotions:
                 strongest_emotions[index]=emotion

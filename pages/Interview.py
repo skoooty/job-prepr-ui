@@ -14,6 +14,8 @@ from streamlit_webrtc import (
 )
 from utils.video import find_face
 from utils.questions import load_questions, get_rand_question
+from utils.page_switch import switch_page
+
 
 
 #Defining the variables
@@ -123,12 +125,7 @@ def main():
             result={"Frames": frames, "Emotions": emotions}
             st.session_state["result"]=result
 
-            #Message to the user
-            st.header("Amazing!")
-            st.markdown("We have analysed your response.\n Go to the **Result** page to check it out :)")
-            im = imageio.imread('rep_pg.png')
-            st.image(im)
-            st.markdown("...or start a new session.")
+            switch_page('Result')
 
         st.session_state["question"] = None
 
