@@ -6,8 +6,12 @@ from google.oauth2 import service_account
 import streamlit as st
 
 
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+
 def getconn() -> pg8000.Connection:
-    with Connector(credentials=service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])) as connector:
+    with Connector(credentials=credentials) as connector:
         conn = connector.connect(
             os.environ.get('INSTANCE'),
             'pg8000',

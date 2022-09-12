@@ -13,6 +13,8 @@ from streamlit_webrtc import (
 from utils.video import find_face
 from utils.questions import load_questions, get_rand_question
 
+from utils.page_switch import switch_page
+
 
 
 #Defining the variables
@@ -111,24 +113,8 @@ def main():
 
         #Storing emotions
         if analysing:
+
             st.write("Go to report")
-            # emotions=[]
-            # for frame in frames:
-            #     frame_res=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            #     frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
-            #     emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
-            #     emotions.append(emotion)
-
-            # #Storing the final output
-            # result={"Frames": frames, "Emotions": emotions}
-            # st.session_state["result"]=result
-
-            # #Message to the user
-            # st.header("Amazing!")
-            # st.markdown("We have analysed your response.\n Go to the **Result** page to check it out :)")
-            # im = imageio.imread('rep_pg.png')
-            # st.image(im)
-            # st.markdown("...or start a new session.")
 
         st.session_state["question"] = None
 

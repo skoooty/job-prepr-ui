@@ -4,8 +4,6 @@ import streamlit as st
 import imageio
 from utils.db_queries import login_user, create_new_user
 
-
-
 def main():
     logged_in=False
 
@@ -53,8 +51,6 @@ def main():
                 st.write("The email and password don't match.")
 
     st.session_state["logged_in"]=logged_in
-
-
 
 if __name__ == "__main__":
     main()
