@@ -11,7 +11,9 @@ credentials = service_account.Credentials.from_service_account_info(
 
 #Voice to text
 def transcribe(source):
-    """Transcribe the given audio file from a local or bucket path"""
+    """Transcribe the given audio file from a local or bucket path
+    transctipt = the full transctipt which should be used for emotion analysis
+    web_transcript = sample transctipt with highest confidence to be shown on the web page"""
     with io.open(source, "rb") as audio_file:
         content = audio_file.read()
         
@@ -29,7 +31,14 @@ def transcribe(source):
     response = client.recognize(config=config, audio=audio)
     best_alternative = speech.SpeechRecognitionAlternative()
     transcript = ''
+    init_confidence=0
+    
     for result in response.results:
         best_alternative = result.alternatives[0]
         transcript += best_alternative.transcript
-    return transcript
+        #import ipdb; ipdb.set_trace()
+        confidence = best_alternative.confidence
+        if confidence > init_confidence:
+            init_confidence = confidence
+            web_transcript = best_alternative.transcript
+    return transcript, web_transcript

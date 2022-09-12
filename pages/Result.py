@@ -27,11 +27,11 @@ def main():
         st.write(" ")
         st.write("🗣️ Let's analyse what you said...")
 
-        transcription=transcribe("record.mp3")
+        transcription, web_transcript = transcribe("record.mp3")
 
         if transcription:
-            st.markdown(f"You said:")
-            st.markdown(f"""{transcription}""")
+            st.markdown(f"Sample sentence you said:")
+            st.markdown(f"""{web_transcript}""")
 
             #Getting text from voice
             response = requests.get(f'https://npapi-lbzgzaglla-ew.a.run.app/predictnlp?text={transcription}').json()[0]
