@@ -14,8 +14,6 @@ from streamlit_webrtc import (
 )
 from utils.video import find_face
 from utils.questions import load_questions, get_rand_question
-from utils.voice import recorder_factory
-
 
 
 #Defining the variables
