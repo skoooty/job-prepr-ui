@@ -1,8 +1,6 @@
 import streamlit as st
 import threading
-import requests
-import json
-import cv2
+
 import imageio
 import time
 import pathlib
@@ -14,16 +12,13 @@ from streamlit_webrtc import (
 )
 from utils.video import find_face
 from utils.questions import load_questions, get_rand_question
-from Home import logged_in
+
 
 
 #Defining the variables
 lock = threading.Lock()
 img_container = {"frames":[]}
-url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for analysing te facial expressions
-result = {}
-frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
-resolution=48 #e.g.48 means that the resolution is (48,48,1)
+
 s_per_question=60 #maximum duration of the video input in s
 
 #Extracting frames from the video input
@@ -110,29 +105,30 @@ def main():
     if not playing:
         #Extracting the frames
         full_frames=st.session_state["photo_frames"]
-        frames=full_frames[::frame_rate]
-        if len(frames):
+
+        if len(full_frames):
             analysing=True
 
         #Storing emotions
         if analysing:
-            emotions=[]
-            for frame in frames:
-                frame_res=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-                frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
-                emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
-                emotions.append(emotion)
+            st.write("Go to report")
+            # emotions=[]
+            # for frame in frames:
+            #     frame_res=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            #     frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
+            #     emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
+            #     emotions.append(emotion)
 
-            #Storing the final output
-            result={"Frames": frames, "Emotions": emotions}
-            st.session_state["result"]=result
+            # #Storing the final output
+            # result={"Frames": frames, "Emotions": emotions}
+            # st.session_state["result"]=result
 
-            #Message to the user
-            st.header("Amazing!")
-            st.markdown("We have analysed your response.\n Go to the **Result** page to check it out :)")
-            im = imageio.imread('rep_pg.png')
-            st.image(im)
-            st.markdown("...or start a new session.")
+            # #Message to the user
+            # st.header("Amazing!")
+            # st.markdown("We have analysed your response.\n Go to the **Result** page to check it out :)")
+            # im = imageio.imread('rep_pg.png')
+            # st.image(im)
+            # st.markdown("...or start a new session.")
 
         st.session_state["question"] = None
 

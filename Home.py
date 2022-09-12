@@ -4,7 +4,7 @@ import streamlit as st
 import imageio
 from utils.db_queries import login_user, create_new_user
 
-logged_in=False
+
 
 def main():
     logged_in=False
