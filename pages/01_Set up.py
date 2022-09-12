@@ -2,8 +2,10 @@ import streamlit as st
 import imageio
 
 def main():
-
-    logged_in=st.session_state["logged_in"]
+    if 'logged_in' not in st.session_state:
+        logged_in=False
+    else:
+        logged_in=st.session_state["logged_in"]
 
     st.title("Let's set the room up for your interview!")
 

@@ -42,7 +42,7 @@ def login_user(email: str, password: str) -> bool:
 
         if check_password(password, salt, hashed_password):
             return 1
-        
+
         return 0
 
 def save_results(user_id: int, results: json) -> None:

@@ -5,7 +5,6 @@ import json
 import cv2
 from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_graph
 from utils.voice import transcribe
-#from pages.Interview import frames
 
 
 resolution=48 #e.g.48 means that the resolution is (48,48,1)
@@ -13,7 +12,10 @@ url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for
 frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 
 def main():
-    logged_in=st.session_state["logged_in"]
+    if 'logged_in' not in st.session_state:
+        logged_in=False
+    else:
+        logged_in=st.session_state["logged_in"]
 
     if "photo_frames" not in st.session_state:
         st.write("Please go to the Interview page and record your response.")
@@ -23,6 +25,7 @@ def main():
 
         full_frames=st.session_state["photo_frames"]
         frames=full_frames[::frame_rate]
+        st.write(len(frames))
 
         emotions=[]
         for frame in frames:
@@ -34,9 +37,6 @@ def main():
         #Storing the final output
         result={"Frames": frames, "Emotions": emotions}
         st.session_state["result"]=result
-
-
-
 
         emotions=pd.DataFrame(columns=emotions_names)
         for emotion in result["Emotions"]:

@@ -3,7 +3,10 @@ import imageio
 
 
 def main():
-    logged_in=st.session_state["logged_in"]
+    if 'logged_in' not in st.session_state:
+        logged_in=False
+    else:
+        logged_in=st.session_state["logged_in"]
 
     st.title("How to use our app?")
     st.write("Our app will help you feel more confident at your next video interview. You'll get a chance to practice interview questions and we'll give you feedback for each interview you film.")

@@ -40,8 +40,10 @@ def recorder_factory():
     return MediaRecorder("record.mp3")
 
 def main():
-    logged_in=st.session_state["logged_in"]
-
+    if 'logged_in' not in st.session_state:
+        logged_in=False
+    else:
+        logged_in=st.session_state["logged_in"]
 
     #Button code
     file_path=pathlib.Path(__file__).resolve().parent.parent.joinpath("styles", "main.css")
@@ -110,13 +112,11 @@ def main():
 
         if len(full_frames):
             analysing=True
-
-        #Storing emotions
-        if analysing:
-
-            st.write("Go to report")
-
         st.session_state["question"] = None
+        if analysing:
+            switch_page("Result")
+
+
 
 
 if __name__ == "__main__":
