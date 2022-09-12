@@ -14,6 +14,9 @@ def transcribe(source):
     """Transcribe the given audio file from a local or bucket path"""
     with io.open(source, "rb") as audio_file:
         content = audio_file.read()
+        
+    #import ipdb; ipdb.set_trace()
+     
     audio = speech.RecognitionAudio(content=content)
     config = speech.RecognitionConfig(
                 encoding=speech.RecognitionConfig.AudioEncoding.MP3,
@@ -25,7 +28,8 @@ def transcribe(source):
     client = speech.SpeechClient(credentials=credentials)
     response = client.recognize(config=config, audio=audio)
     best_alternative = speech.SpeechRecognitionAlternative()
+    transcript = ''
     for result in response.results:
         best_alternative = result.alternatives[0]
-    transcript = best_alternative.transcript
+        transcript += best_alternative.transcript
     return transcript
