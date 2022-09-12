@@ -1,20 +1,42 @@
 import streamlit as st
 import pandas as pd
 import requests
+import json
+import cv2
 from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_graph
 from utils.voice import transcribe
-from pages.Interview import result
-from Home import logged_in
+#from pages.Interview import frames
+
+
+resolution=48 #e.g.48 means that the resolution is (48,48,1)
+url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for analysing te facial expressions
+frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 
 def main():
     logged_in=st.session_state["logged_in"]
 
-    if "result" not in st.session_state:
+    if "photo_frames" not in st.session_state:
         st.write("Please go to the Interview page and record your response.")
     else:
         st.title("Good job!")
         st.markdown("😄 Let's analyse your facial expressions...")
-        result=st.session_state["result"]
+
+        full_frames=st.session_state["photo_frames"]
+        frames=full_frames[::frame_rate]
+
+        emotions=[]
+        for frame in frames:
+            frame_res=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
+            emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
+            emotions.append(emotion)
+
+        #Storing the final output
+        result={"Frames": frames, "Emotions": emotions}
+        st.session_state["result"]=result
+
+
+
 
         emotions=pd.DataFrame(columns=emotions_names)
         for emotion in result["Emotions"]:

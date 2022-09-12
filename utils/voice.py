@@ -16,9 +16,9 @@ def transcribe(source):
     web_transcript = sample transctipt with highest confidence to be shown on the web page"""
     with io.open(source, "rb") as audio_file:
         content = audio_file.read()
-        
+
     #import ipdb; ipdb.set_trace()
-     
+
     audio = speech.RecognitionAudio(content=content)
     config = speech.RecognitionConfig(
                 encoding=speech.RecognitionConfig.AudioEncoding.MP3,
@@ -32,7 +32,9 @@ def transcribe(source):
     best_alternative = speech.SpeechRecognitionAlternative()
     transcript = ''
     init_confidence=0
-    
+
+    web_transcript=""
+
     for result in response.results:
         best_alternative = result.alternatives[0]
         transcript += best_alternative.transcript
