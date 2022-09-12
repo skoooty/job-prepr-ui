@@ -1,11 +1,14 @@
 import streamlit as st
 import pandas as pd
 import requests
-from utils.emotions import emotinos_names, show_strongest_emotion, show_emotion_graph
+from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_graph
 from utils.voice import transcribe
 from pages.Interview import result
+from Home import logged_in
 
 def main():
+    logged_in=st.session_state["logged_in"]
+
     if "result" not in st.session_state:
         st.write("Please go to the Interview page and record your response.")
     else:
@@ -13,10 +16,10 @@ def main():
         st.markdown("😄 Let's analyse your facial expressions...")
         result=st.session_state["result"]
 
-        emotions=pd.DataFrame(columns=emotinos_names)
+        emotions=pd.DataFrame(columns=emotions_names)
         for emotion in result["Emotions"]:
             emotions=emotions.append(pd.DataFrame([emotion],
-            columns=emotinos_names),
+            columns=emotions_names),
             ignore_index=True)
 
         show_strongest_emotion(emotions)

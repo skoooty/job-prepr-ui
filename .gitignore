@@ -36,3 +36,7 @@ training_outputs/
 
 .python_version
 nohup.out
+<<<<<<< HEAD
+**/__pycache__/
+=======
+>>>>>>> master

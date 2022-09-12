@@ -14,6 +14,7 @@ from streamlit_webrtc import (
 )
 from utils.video import find_face
 from utils.questions import load_questions, get_rand_question
+from Home import logged_in
 
 
 #Defining the variables
@@ -42,6 +43,9 @@ def recorder_factory():
     return MediaRecorder("record.mp3")
 
 def main():
+    logged_in=st.session_state["logged_in"]
+
+
     #Button code
     file_path=pathlib.Path(__file__).resolve().parent.parent.joinpath("styles", "main.css")
     with open(file_path) as f:
@@ -131,6 +135,7 @@ def main():
             st.markdown("...or start a new session.")
 
         st.session_state["question"] = None
+
 
 if __name__ == "__main__":
     main()
