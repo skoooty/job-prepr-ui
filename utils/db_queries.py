@@ -12,3 +12,20 @@ def create_new_user(email: str, password: str) -> None:
         db_conn.execute("INSERT INTO users (email, password, salt) VALUES (?,?,?)", (email, hashed_password, salt,))
 
     return None
+
+def login_user(email: str, password: str) -> bool:
+
+    pool = create_pool()
+
+    with pool.connect() as db_conn:
+        result = db_conn.execute("SELECT password, salt FROM users WHERE email = ?", (email)).fetchall()
+
+    if len(result) == 0:
+        return "User does not exist"
+
+    hashed_password, salt = result[0]
+
+    if hash_password(password, salt) == hashed_password:
+        return True
+
+    return "Incorrect password"
