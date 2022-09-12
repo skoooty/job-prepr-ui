@@ -9,9 +9,12 @@ def create_new_user(email: str, password: str) -> None:
     salt, hashed_password = hash_password(password)
 
     with pool.connect() as db_conn:
-        db_conn.execute("INSERT INTO users (email, password, salt) VALUES (?,?,?)", (email, hashed_password, salt,))
+        try:
+            db_conn.execute("INSERT INTO users (email, password, salt) VALUES (%s,%s,%s)", (email, hashed_password, salt))
+        except:
+            return "Email is already taken"
 
-    return None
+    return "Account created!"
 
 def login_user(email: str, password: str) -> bool:
 
