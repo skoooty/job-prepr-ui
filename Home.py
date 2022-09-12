@@ -1,6 +1,6 @@
 import streamlit as st
 import imageio
-from utils.db_queries import login_user, create_new_user
+from utils.db_queries import login_user, create_new_user, get_user_id
 
 def main():
     logged_in=False
@@ -44,7 +44,7 @@ def main():
             if log == 1:
                 logged_in=True
                 st.subheader("You're logged in, let'go!")
-
+                st.session_state["user_id"] = get_user_id(email)
             else:
                 st.write("The email and password don't match.")
 

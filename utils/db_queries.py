@@ -66,3 +66,14 @@ def read_results(user_id: int):
         result = db_conn.execute("SELECT tstamp, results FROM results WHERE user_id = %s", (user_id)).fetchall()
 
     return result
+
+def get_user_id(email: str) -> int:
+    """
+    Returns a user's id
+    """
+    pool = create_pool()
+
+    with pool.connect() as db_conn:
+        result = db_conn.execute("SELECT id FROM users WHERE email = %s", (email)).fetchall()
+
+    return result[0][0]
