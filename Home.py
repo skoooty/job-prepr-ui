@@ -1,15 +1,17 @@
 import streamlit as st
 import imageio
 from utils.db_queries import login_user, create_new_user
+from utils.get_css import get_css
 
 def main():
+
+    # logo = imageio.imread('./Logo.png')
+    # st.sidebar.image(logo)
+
+    st.markdown(get_css(),unsafe_allow_html=True)
     logged_in=False
 
-    st.title("Welcome!")
-
-    st.subheader("I'm Samantha and I'll help you to prepare for your next interview.")
-    im = imageio.imread('robot.png')
-    st.image(im)
+    st.markdown("<h1 style='text-align: center; color: black;'>Welcome to JobPrepr!</h1>", unsafe_allow_html=True)
 
     if st.checkbox("Sign Up"):
         st.markdown("Create a new account, or untick the **Sign Up** checkbox to log in.")

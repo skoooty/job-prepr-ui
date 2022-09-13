@@ -1,8 +1,12 @@
 import streamlit as st
 import imageio
+from utils.get_css import get_css
 
 
 def main():
+
+    st.markdown(get_css(),unsafe_allow_html=True)
+
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:

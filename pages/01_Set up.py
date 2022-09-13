@@ -1,13 +1,18 @@
 import streamlit as st
 import imageio
+from utils.get_css import get_css
+
 
 def main():
+
+    st.markdown(get_css(),unsafe_allow_html=True)
+
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
         logged_in=st.session_state["logged_in"]
 
-    st.title("Let's set the room up for your interview!")
+    st.markdown("<h1 style='text-align: center; color: black;'>Room Setup</h1>", unsafe_allow_html=True)
 
     #Quiet
     st.subheader("Quiet room")

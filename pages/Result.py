@@ -5,6 +5,7 @@ import json
 import cv2
 from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_graph
 from utils.voice import transcribe
+from utils.get_css import get_css
 
 
 resolution=48 #e.g.48 means that the resolution is (48,48,1)
@@ -12,6 +13,9 @@ url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for
 frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 
 def main():
+
+    st.markdown(get_css(),unsafe_allow_html=True)
+
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
@@ -20,7 +24,7 @@ def main():
     if "photo_frames" not in st.session_state:
         st.write("Please go to the Interview page and record your response.")
     else:
-        st.title("Good job!")
+        st.markdown("<h1 style='text-align: center; color: black;'>Results</h1>", unsafe_allow_html=True)
         st.markdown("😄 Let's analyse your facial expressions...")
 
         full_frames=st.session_state["photo_frames"]
