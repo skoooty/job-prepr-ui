@@ -10,6 +10,11 @@ aiortc
 seaborn
 matplotlib
 google-cloud-speech
-cloud-sql-python-connector
+cloud-sql-python-connector==0.8.1
 sqlalchemy
 pg8000
+google-api-core==2.10.0
+google-auth==2.11.0
+google-cloud-speech==2.15.1
+google-crc32c==1.5.0
+googleapis-common-protos==1.56.4
