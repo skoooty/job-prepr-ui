@@ -1,7 +1,5 @@
 import streamlit as st
 import threading
-
-import imageio
 import time
 import pathlib
 from aiortc.contrib.media import MediaRecorder

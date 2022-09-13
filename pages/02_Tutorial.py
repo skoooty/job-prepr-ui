@@ -47,6 +47,7 @@ def main():
     im = imageio.imread('screenshots/open_result.png')
     st.image(im)
 
+    st.session_state["photo_frames"]=[]
 
 if __name__ == "__main__":
     main()
