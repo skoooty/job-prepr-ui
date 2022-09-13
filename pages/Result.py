@@ -7,11 +7,12 @@ from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_
 from utils.voice import transcribe
 
 
-resolution=48 #e.g.48 means that the resolution is (48,48,1)
-url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for analysing te facial expressions
+resolution=100 #e.g.48 means that the resolution is (48,48,1)
+url_api_face_rec="https://job-prepr-test-lbzgzaglla-ew.a.run.app/predict" #API for analysing te facial expressions
 frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 
 def main():
+
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
