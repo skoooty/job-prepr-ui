@@ -1,8 +1,6 @@
-import sqlalchemy
 from utils.db_connect import create_pool
 from utils.db_password import hash_password, check_password
 import json
-import datetime
 import streamlit as st
 from utils.db_connect import create_pool
 from utils.db_password import hash_password, check_password
@@ -52,7 +50,7 @@ def save_results(user_id: int, results: json) -> None:
     pool = create_pool()
 
     with pool.connect() as db_conn:
-        db_conn.execute("INSERT INTO results VALUES (%s, %s, %s)", (user_id, datetime.now(), results))
+        db_conn.execute("INSERT INTO results VALUES (%s, now(), %s)", (user_id, results))
 
     return None
 
@@ -75,5 +73,16 @@ def get_user_id(email: str) -> int:
 
     with pool.connect() as db_conn:
         result = db_conn.execute("SELECT id FROM users WHERE email = %s", (email)).fetchall()
+
+    return result[0][0]
+
+def get_user_email(user_id: int) -> str:
+    """
+    Returns a user's email
+    """
+    pool = create_pool()
+
+    with pool.connect() as db_conn:
+        result = db_conn.execute("SELECT email FROM users WHERE id = %s", (user_id)).fetchall()
 
     return result[0][0]

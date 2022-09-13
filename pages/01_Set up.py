@@ -52,5 +52,7 @@ def main():
     st.header("✅")
     st.write("Good! You're all set for the interview!")
 
+    st.session_state["photo_frames"]=[]
+
 if __name__ == "__main__":
     main()

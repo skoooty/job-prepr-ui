@@ -49,6 +49,7 @@ def main():
                 st.write("The email and password don't match.")
 
     st.session_state["logged_in"]=logged_in
+    st.session_state["photo_frames"]=[]
 
 if __name__ == "__main__":
     main()
