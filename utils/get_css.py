@@ -2,14 +2,20 @@ def get_css():
     return """
         <style>
             [class="main css-k1vhr4 egzxvld3"] {
-                background-color: #FFFFFF;
+                background-color: #EDF2F4;
             }
             [class="css-18ni7ap e8zbici2"] {
-                background-color: #FFFFFF;
+                background-color: #EDF2F4;
+            }
+            [class="st-bp st-cz st-d0 st-d1 st-d2 st-d3 st-d4 st-d5 st-d6 st-d7 st-d8 st-b7 st-d9 st-da st-cg st-db st-dc st-dd st-de st-ae st-af st-ag st-df st-ai st-aj st-ck st-dg st-dh st-di st-dj"] {
+                background-color: white !important;
+            }
+            [class="sst-av st-aw st-ax st-ay st-bp st-cf st-b7 st-b4 st-b5 st-da st-cm st-cn st-co st-cp st-bq st-br st-bs st-bt st-dl st-b2 st-bj st-ck st-cr st-cs st-ct st-cu st-cv"] {
+                background-color: white !important;
             }
             [class="css-1ope8sv e1fqkh3o4"]{
-                background-color: #8D99AE;
-                color: white
+                background-color: #c3cad5;
+                /*color: white*/
             }
             [data-testid="stSidebarNav"] {
                 background-image: url(https://storage.cloud.google.com/job-prepr/Logo.png);
@@ -72,9 +78,15 @@ def get_css():
                 background-color: #0E27C8;
                 color: white;
             }
-            [class="css-y3drt2 e1fqkh3o6"]:active {
+            /* [class="css-y3drt2 e1fqkh3o6"]{
                 color: white !important;
             }
+            [class="e1fb0mya1 css-rytr0c ex0cdmw0"]{
+                color: white !important;
+            }
+            [class="css-blpj7h e1fqkh3o6"]{
+                color: white !important;
+            } */
             @font-face {
             font-family: 'Metropolis';
             font-style: normal;
