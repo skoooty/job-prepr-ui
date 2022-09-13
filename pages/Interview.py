@@ -59,13 +59,12 @@ def main():
     questions=load_questions()
     job_list = questions["Area"].unique()
 
-    #Sidebar
-    with st.sidebar:
-        st.title('Area Selection')
-        job_name = st.selectbox("Select the job that you are applying for:", job_list)
-
     #Title, text, page setup
     st.markdown("<h1 style='text-align: center; color: black;'>How confident are you?</h1>", unsafe_allow_html=True)
+    st.write("")
+    st.write("")
+    st.markdown("<h5 style='text-align: center; color: black;'>Select your job area below:</h5>", unsafe_allow_html=True)
+    job_name = st.selectbox("", job_list)
     st.markdown(f"Let's practice for your {job_name} interview.")
     st.markdown(f"You have {s_per_question}s to answer the question that will pop up on the screen.")
     st.markdown(f"**Good luck!**")

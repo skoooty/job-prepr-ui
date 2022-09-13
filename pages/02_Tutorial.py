@@ -5,6 +5,7 @@ from utils.get_css import get_css
 
 def main():
 
+    row1= st.empty()
     st.markdown(get_css(),unsafe_allow_html=True)
 
     if 'logged_in' not in st.session_state:
@@ -12,45 +13,42 @@ def main():
     else:
         logged_in=st.session_state["logged_in"]
 
-    st.title("How to use our app?")
-    st.write("Our app will help you feel more confident at your next video interview. You'll get a chance to practice interview questions and we'll give you feedback for each interview you film.")
+    if 'tutorial_index' not in st.session_state:
+        st.session_state['tutorial_index'] = 0
 
-    st.subheader("Interview")
+    with row1.container():
+        st.markdown("<h1 style='text-align: center; color: black;'>How to use JobPrepr</h1>", unsafe_allow_html=True)
+        st.write("Our app will help you feel more confident at your next video interview. You'll get a chance to practice interview questions and we'll give you feedback for each interview you film.")
 
-    st.markdown("* Go to the **Interview** page.")
-    im = imageio.imread('screenshots/open_interview.png')
-    st.image(im)
+    text = ["* Go to the **Interview** page.",
+            "* Select the **area** that you are applying for from the drop down list. You will be able to see the selected area in the text on the page.",
+            "* When you're ready to start the interview, click the **Start/Stop** checkbox.",
+            "* A question will pop up on the screen and the video will start recording. You should answer the question you see on the screen. The clock at the bottom of the page indicates how many seconds you have left. If you run out of time, the recording will stop automatically. If you want to stop it earlier, click the **Start/Stop** checkbox.",
+            "* Wait a couple of seconds for the result to be generated.",
+            "* Once the result is generated, go to the **Result page**."
+            ]
+    images = ['screenshots/open_interview.png',
+                'screenshots/area_selection.png',
+                'screenshots/start_stop.png',
+                'screenshots/video_recording.png',
+                'screenshots/report_ready.png',
+                'screenshots/open_result.png',
+              ]
+    page = st.empty()
+    col1, col2, col3 = st.columns([1,1,1])
 
-    st.write("")
-    st.write("")
-    st.markdown("* Select the **area** that you are applying for from the drop down list. You will be able to see the selected area in the text on the page.")
-    im = imageio.imread('screenshots/area_selection.png')
-    st.image(im)
+    with col1:
+        if st.button('Previous') and st.session_state['tutorial_index'] != 0:
+            st.session_state['tutorial_index'] -= 1
 
-    st.write("")
-    st.write("")
-    st.markdown("* When you're ready to start the interview, click the **Start/Stop** checkbox.")
-    im = imageio.imread('screenshots/start_stop.png')
-    st.image(im)
+    with col3:
+        if st.button('Next') and st.session_state['tutorial_index'] != 5:
+            st.session_state['tutorial_index'] += 1
 
-    st.write("")
-    st.write("")
-    st.markdown("* A question will pop up on the screen and the video will start recording. You should answer the question you see on the screen. The clock at the bottom of the page indicates how many seconds you have left. If you run out of time, the recording will stop automatically. If you want to stop it earlier, click the **Start/Stop** checkbox.")
-    im = imageio.imread('screenshots/video_recording.png')
-    st.image(im)
-
-    st.write("")
-    st.write("")
-    st.markdown("* Wait a couple of seconds for the result to be generated.")
-    im = imageio.imread('screenshots/report_ready.png')
-    st.image(im)
-
-    st.write("")
-    st.write("")
-    st.markdown("* Once the result is generated, go to the **Result page**.")
-    im = imageio.imread('screenshots/open_result.png')
-    st.image(im)
-
+    with page.container():
+        st.markdown(text[st.session_state['tutorial_index']])
+        im = imageio.imread(images[st.session_state['tutorial_index']])
+        st.image(im)
 
 if __name__ == "__main__":
     main()

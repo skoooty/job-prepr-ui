@@ -10,12 +10,13 @@ def main():
 
     st.markdown(get_css(),unsafe_allow_html=True)
     logged_in=False
+    st.session_state['index'] = 0
+    st.markdown("<h1 style='text-align: center; color: #0E27C8;'>Welcome to JobPrepr!</h1>", unsafe_allow_html=True)
 
-    st.markdown("<h1 style='text-align: center; color: black;'>Welcome to JobPrepr!</h1>", unsafe_allow_html=True)
 
-    if st.checkbox("Sign Up"):
-        st.markdown("Create a new account, or untick the **Sign Up** checkbox to log in.")
-
+    st.markdown("Please type in your email and password to log in, or tick the **Sign Up** checkbox to create a new account.")
+    chk = st.checkbox("Sign Up")
+    if chk:
         email_new = st.text_input('Email ', '', key=1)
         password1 = st.text_input('Password ', '', key=2)
         password2 = st.text_input('Confirm password', '', key=3)
@@ -37,7 +38,6 @@ def main():
             st.write("Passwords don't match.")
 
     else:
-        st.markdown("Please type in your email and password to log in, or tick the **Sign Up** checkbox to create a new account.")
         email = st.text_input('Email', '', key=4)
         password = st.text_input('Password', '', key=5)
         if st.button('Log In'):
