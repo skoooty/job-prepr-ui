@@ -21,7 +21,7 @@ def getconn() -> pg8000.Connection:
         )
     return conn
 
-
+@st.experimental_singleton
 def create_pool():
     conn = getconn()
 

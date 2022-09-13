@@ -25,8 +25,8 @@ def login_user(email: str, password: str) -> bool:
     """"
     Authenticates a user's login credentials.
     """
-    pool = create_pool()
-
+    #pool = create_pool()
+    #breakpoint()
     if email and password:
         pool = create_pool()
 
@@ -41,7 +41,7 @@ def login_user(email: str, password: str) -> bool:
         if check_password(password, salt, hashed_password):
             return 1
 
-        return 0
+    return 0
 
 def save_results(user_id: int, results: json) -> None:
     """
