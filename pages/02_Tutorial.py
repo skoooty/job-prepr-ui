@@ -49,6 +49,7 @@ def main():
         st.markdown(text[st.session_state['tutorial_index']])
         im = imageio.imread(images[st.session_state['tutorial_index']])
         st.image(im)
+    st.session_state["photo_frames"]=[]
 
 if __name__ == "__main__":
     main()
