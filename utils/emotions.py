@@ -10,11 +10,11 @@ emotions_names = ['angry','disgusted','afraid','happy','neutral','sad','surprise
 def show_strongest_emotion(emotions):
     strongest_emotion={"Emotion":"angry", "Perc": 0}
     for emotion in emotions_names:
-        perc=round(emotions[emotion].mean()*100)
+        perc=emotions[emotion].mean()*100
         if strongest_emotion["Perc"]<perc:
             strongest_emotion["Perc"]=perc
             strongest_emotion["Emotion"]=emotion
-    st.header(f'You seemed mostly **{strongest_emotion["Emotion"]}** ({strongest_emotion["Perc"]}%).\n')
+    st.header(f'You seemed mostly **{strongest_emotion["Emotion"]}** ({round(strongest_emotion["Perc"])}%).\n')
 
 def most_emotional_face(emotion, emotions_list, frames):
 
