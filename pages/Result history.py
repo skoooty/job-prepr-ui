@@ -32,7 +32,7 @@ def main():
                 st.markdown("Let's analyse your facial expressions...")
                 show_strongest_emotion(emotions)
 
-                show_emotion_graph(emotions, res1[1])
+                show_emotion_graph(emotions, emotions_list=res1[1]["Emotions"], images=res1[1]["Images"])
                 st.write("")
                 st.write("")
 
