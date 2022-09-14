@@ -1,36 +1,63 @@
 def get_css():
-    return """
+    return ("""
+
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap" rel="stylesheet">
         <style>
+            @font-face {
+                font-family: 'Nunito Sans', sans-serif;
+                font-style: normal;
+            }
+            .sidebar-text{
+                font-family: 'Nunito Sans', sans-serif;
+            }
+            .standard-text{
+                font-family: 'Nunito Sans', sans-serif;
+            }
+            html, body, [class*="css"]  {
+            font-family: 'Nunito Sans' !important;
+            }
+            div[data-baseweb="base-input"] > input {
+                background-color: white;
+            }
+            div[data-baseweb="select"] > div {
+                background-color: white;
+            }
             [class="main css-k1vhr4 egzxvld3"] {
-                background-color: #EDF2F4;
+                background-color: #EDF2F4 !important;
             }
             [class="css-18ni7ap e8zbici2"] {
+                background-color: #EDF2F4 !important;
+            }
+            [class="MuiBox-root css-0"] {
+                background-color: #EDF2F4 !important;
+            }
+            [id="root"] {
+                background-color: #EDF2F4 !important;
+            }
+            [class="MuiBox-root css-gg4vpm"]{
                 background-color: #EDF2F4;
-            }
-            [class="st-bp st-cz st-d0 st-d1 st-d2 st-d3 st-d4 st-d5 st-d6 st-d7 st-d8 st-b7 st-d9 st-da st-cg st-db st-dc st-dd st-de st-ae st-af st-ag st-df st-ai st-aj st-ck st-dg st-dh st-di st-dj"] {
-                background-color: white !important;
-            }
-            [class="sst-av st-aw st-ax st-ay st-bp st-cf st-b7 st-b4 st-b5 st-da st-cm st-cn st-co st-cp st-bq st-br st-bs st-bt st-dl st-b2 st-bj st-ck st-cr st-cs st-ct st-cu st-cv"] {
-                background-color: white !important;
+                color: white
             }
             [class="css-1ope8sv e1fqkh3o4"]{
                 background-color: #7D8491;
                 color: white
             }
+            [data-testid="stSidebarNav"]::after {
+                margin-left: 20px;
+                margin-top: 20px;
+                font-size: 20px;
+                position: relative;
+                top: 20px;
+                }
             [data-testid="stSidebarNav"] {
                 background-image: url(https://storage.cloud.google.com/job-prepr/Logo.png);
                 background-size: 300px 300px;
                 background-repeat: no-repeat;
                 padding-top: 60px;
                 background-position: 20px -70px;
-            }
-            [data-testid="stSidebarNav"]::after {
-                content: "Signed in as:";
-                margin-left: 20px;
-                margin-top: 20px;
-                font-size: 20px;
-                position: relative;
-                top: 20px;
             }
             [class="row-widget stButton"]{
                 width: 172px;
@@ -87,16 +114,6 @@ def get_css():
             [class="css-blpj7h e1fqkh3o6"]{
                 color: white !important;
             }
-            @font-face {
-            font-family: 'Metropolis';
-            font-style: normal;
-            font-weight: 400;
-            src: url(https://storage.cloud.google.com/job-prepr/Metropolis-ExtraLight.otf) format('otf');
-            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-            }
-
-            html, body, [class*="css"]  {
-            font-family: 'Metropolis';
-            }
         </style>
         """
+    )

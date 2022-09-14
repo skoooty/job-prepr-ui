@@ -2,6 +2,7 @@ import streamlit as st
 import imageio
 from utils.db_queries import login_user, create_new_user, get_user_id
 from utils.get_css import get_css
+import streamlit.components.v1 as components
 
 def main():
 
@@ -18,8 +19,8 @@ def main():
     chk = st.checkbox("Sign Up")
     if chk:
         email_new = st.text_input('Email ', '', key=1)
-        password1 = st.text_input('Password ', '', key=2)
-        password2 = st.text_input('Confirm password', '', key=3)
+        password1 = st.text_input('Password ', '', key=2, type='password')
+        password2 = st.text_input('Confirm password', '', key=3, type='password')
 
         if password1==password2:
             if "@" in email_new:
@@ -39,13 +40,15 @@ def main():
 
     else:
         email = st.text_input('Email', '', key=4)
-        password = st.text_input('Password', '', key=5)
+        password = st.text_input('Password', '', key=5, type='password')
         if st.button('Log In'):
             logged_in=False
             log=login_user(email, password)
             if log == 1:
                 logged_in=True
                 st.subheader("You're logged in, let'go!")
+                st.session_state['email'] = email
+                st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
                 st.session_state["user_id"] = get_user_id(email)
             else:
                 st.write("The email and password don't match.")

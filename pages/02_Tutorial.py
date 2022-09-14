@@ -7,7 +7,8 @@ def main():
 
     row1= st.empty()
     st.markdown(get_css(),unsafe_allow_html=True)
-
+    if 'user_email' in st.session_state:
+        st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
@@ -38,12 +39,16 @@ def main():
     col1, col2, col3 = st.columns([1,1,1])
 
     with col1:
-        if st.button('Previous') and st.session_state['tutorial_index'] != 0:
-            st.session_state['tutorial_index'] -= 1
+        if st.session_state['tutorial_index'] != 0:
+            if st.button('Previous'):
+                st.session_state['tutorial_index'] -= 1
+                st.experimental_rerun()
 
     with col3:
-        if st.button('Next') and st.session_state['tutorial_index'] != 5:
-            st.session_state['tutorial_index'] += 1
+        if st.session_state['tutorial_index'] != 5:
+            if st.button('Next'):
+                st.session_state['tutorial_index'] += 1
+                st.experimental_rerun()
 
     with page.container():
         st.markdown(text[st.session_state['tutorial_index']])
