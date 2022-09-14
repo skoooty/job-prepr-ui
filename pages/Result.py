@@ -77,7 +77,7 @@ def main():
         #Voice
         st.write(" ")
         st.write(" ")
-        st.markdown("🗣️")
+        st.subheader("🗣️")
         st.markdown("Let's analyse what you said...")
         if transcription:
             if response["label"]=="POSITIVE":
