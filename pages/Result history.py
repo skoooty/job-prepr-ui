@@ -15,9 +15,10 @@ def main():
     if not logged_in:
         st.write("Please log in to access your result history.")
     else:
-        st.title(f"Result history for {get_user_email(st.session_state['user_id'])}")
-
-        results_stored=read_results(st.session_state["user_id"])
+        with st.spinner("Loading..."):
+            st.title(f"Result history for {get_user_email(st.session_state['user_id'])}")
+        with st.spinner("Loading the result..."):
+            results_stored=read_results(st.session_state["user_id"])
         if results_stored:
             i=1
             for res1 in results_stored:
