@@ -14,8 +14,8 @@ def get_css():
                 background-color: white !important;
             }
             [class="css-1ope8sv e1fqkh3o4"]{
-                background-color: #c3cad5;
-                /*color: white*/
+                background-color: #7D8491;
+                color: white
             }
             [data-testid="stSidebarNav"] {
                 background-image: url(https://storage.cloud.google.com/job-prepr/Logo.png);
@@ -78,7 +78,7 @@ def get_css():
                 background-color: #0E27C8;
                 color: white;
             }
-            /* [class="css-y3drt2 e1fqkh3o6"]{
+            [class="css-y3drt2 e1fqkh3o6"]{
                 color: white !important;
             }
             [class="e1fb0mya1 css-rytr0c ex0cdmw0"]{
@@ -86,7 +86,7 @@ def get_css():
             }
             [class="css-blpj7h e1fqkh3o6"]{
                 color: white !important;
-            } */
+            }
             @font-face {
             font-family: 'Metropolis';
             font-style: normal;
