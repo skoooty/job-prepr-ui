@@ -5,6 +5,7 @@ import json
 import cv2
 from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_graph
 from utils.voice import transcribe
+from utils.get_css import get_css
 from utils.db_queries import save_results, get_user_email
 
 
@@ -14,6 +15,8 @@ frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 
 def main():
 
+    st.markdown(get_css(),unsafe_allow_html=True)
+
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
@@ -22,9 +25,8 @@ def main():
     if ("photo_frames" not in st.session_state or not len(st.session_state["photo_frames"])):
         st.write("Please go to the Interview page and record your response.")
     else:
-        st.title("Good job!")
-        st.subheader("😄")
-        st.markdown("Let's analyse your facial expressions...")
+        st.markdown("<h1 style='text-align: center; color: black;'>Results</h1>", unsafe_allow_html=True)
+        st.markdown("😄 Let's analyse your facial expressions...")
 
         #Extracting the frames
         full_frames=st.session_state["photo_frames"]

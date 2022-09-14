@@ -13,6 +13,8 @@ from utils.questions import load_questions, get_rand_question
 
 from utils.page_switch import switch_page
 
+from utils.get_css import get_css
+
 
 
 #Defining the variables
@@ -38,6 +40,9 @@ def recorder_factory():
     return MediaRecorder("record.mp3")
 
 def main():
+
+    st.markdown(get_css(),unsafe_allow_html=True)
+
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
@@ -52,13 +57,12 @@ def main():
     questions=load_questions()
     job_list = questions["Area"].unique()
 
-    #Sidebar
-    with st.sidebar:
-        st.title('Area Selection')
-        job_name = st.selectbox("Select the job that you are applying for:", job_list)
-
     #Title, text, page setup
-    st.title("How confident are you?")
+    st.markdown("<h1 style='text-align: center; color: black;'>How confident are you?</h1>", unsafe_allow_html=True)
+    st.write("")
+    st.write("")
+    st.markdown("<h5 style='text-align: center; color: black;'>Select your job area below:</h5>", unsafe_allow_html=True)
+    job_name = st.selectbox("", job_list)
     st.markdown(f"Let's practice for your {job_name} interview.")
     st.markdown(f"You have {s_per_question}s to answer the question that will pop up on the screen.")
     st.markdown(f"**Good luck!**")
@@ -86,6 +90,11 @@ def main():
             ,  rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
                             }
         )
+        st.markdown("""
+                    <style>
+                    [class=MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1dm0a9e] {
+                    visibility: hidden;
+                    }</style>""", unsafe_allow_html=True)
 
     #Storing photo frames
     if 'photo_frames' not in st.session_state:
