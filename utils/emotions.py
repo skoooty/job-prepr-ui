@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from utils.general import is_loc_max_or_end
 
-emotions_names = ['angry','contempt', 'disgusted','afraid','happy','neutral','sad','surprised']
+emotions_names = ['angry','disgusted','afraid','happy','neutral','sad','surprised']
 
 def show_strongest_emotion(emotions):
     strongest_emotion={"Emotion":"angry", "Perc": 0}
