@@ -26,7 +26,8 @@ def main():
         st.write("Please go to the Interview page and record your response.")
     else:
         st.markdown("<h1 style='text-align: center; color: black;'>Results</h1>", unsafe_allow_html=True)
-        st.markdown("😄 Let's analyse your facial expressions...")
+        st.subheader("😄")
+        st.markdown("Let's analyse your facial expressions...")
 
         #Extracting the frames
         full_frames=st.session_state["photo_frames"]
@@ -86,10 +87,10 @@ def main():
 
             if response["label"]=="NEGATIVE":
                 if score>50:
-                    st.header(f'Why so angry? You sounded {round(response["score"])}% **negative**. 😡')
+                    st.header(f'Why so angry? You sounded {score}% **negative**. 😡')
                     st.write("Next time, try using more positive words.")
                 else:
-                    st.header(f'Upss... You sounded {round(response["score"])}% **negative**.')
+                    st.header(f'Upss... You sounded {score}% **negative**.')
                     st.write("You might want to use more positive words.")
 
             st.markdown(f"Sample sentence you said:")
