@@ -16,18 +16,18 @@ def show_strongest_emotion(emotions):
             strongest_emotion["Emotion"]=emotion
     st.header(f'You seemed mostly **{strongest_emotion["Emotion"]}** ({strongest_emotion["Perc"]}%).\n')
 
-def most_emotional_face(emotion, result):
+def most_emotional_face(emotion, emotions_list, frames):
 
     emotion_index=emotions_names.index(emotion)
     index_most=0
     perc_most=0
-    for i, v in enumerate(result["Emotions"]):
+    for i, v in enumerate(emotions_list):
         if v[emotion_index]>perc_most:
             perc_most=v[emotion_index]
             index_most=i
-    if type(result["Frames"][index_most]) == list:
-        return np.array(result["Frames"][index_most])
-    return result["Frames"][index_most]
+    if type(frames[index_most]) == list:
+        return np.array(frames[index_most])
+    return frames[index_most]
 
 def show_emotion_perc(emotions):
     for emotion in emotions_names:
@@ -41,7 +41,7 @@ def emotion_colour(emotion):
         return "green"
     return "red"
 
-def show_emotion_graph(emotions, result):
+def show_emotion_graph(emotions, emotions_list, frames=None, images=None):
     no_columns=3
 
     #Strongest emotions
@@ -66,6 +66,7 @@ def show_emotion_graph(emotions, result):
 
     #Displaying
     i=0
+    images_list = []
     for emotion in strongest_emotions:
         if i<no_columns:
             #Subtitle
@@ -115,11 +116,16 @@ def show_emotion_graph(emotions, result):
             columns[i].write(f"This is your most {emotion} face:")
 
             #Image
-            image=most_emotional_face(emotion, result)
+            if images is None:
+                image=most_emotional_face(emotion, emotions_list, frames)
+                images_list.append(image.tolist())
+            else:
+                image=np.array(images[i])
             columns[i].image(image, channels="BGR")
 
             #Next column
             i+=1
+    return images_list
 
 def show_emotion_graph_wo_photos(emotions):
     no_columns=3
