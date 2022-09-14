@@ -13,11 +13,11 @@ credentials = service_account.Credentials.from_service_account_info(
 def getconn() -> pg8000.Connection:
     with Connector(credentials=credentials) as connector:
         conn = connector.connect(
-            os.environ.get('INSTANCE'),
+            st.secrets["postgress_instance"]["value"],
             'pg8000',
-            user=os.environ.get('USER'),
-            password=os.environ.get('PASSWORD'),
-            db=os.environ.get('DB')
+            user=st.secrets["postgress_user"]["value"],
+            password=st.secrets["postgress_password"]["value"],
+            db=st.secrets["postgress_db"]["value"],
         )
     return conn
 
