@@ -6,7 +6,8 @@ from utils.get_css import get_css
 def main():
 
     st.markdown(get_css(),unsafe_allow_html=True)
-
+    if 'user_email' in st.session_state:
+        st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
@@ -44,33 +45,38 @@ def main():
     page = st.empty()
     col1, col2, col3 = st.columns([1,1,1])
 
+
+
     with col1:
-        if st.button('Previous') and st.session_state['setup_index'] != 0:
-            st.session_state['setup_index'] -= 1
+        if st.session_state['setup_index'] != 0:
+            if st.button('Previous'):
+                st.session_state['setup_index'] -= 1
+                st.experimental_rerun()
 
     with col3:
-        if st.button('Next') and st.session_state['setup_index'] != 4:
-            st.session_state['setup_index'] += 1
+        if st.session_state['setup_index'] != 4:
+            if st.button('Next'):
+                st.session_state['setup_index'] += 1
+                st.experimental_rerun()
 
     with page.container():
         if st.session_state['setup_index'] == 1:
-                st.subheader("Lighting")
+            st.subheader("Lighting")
 
-                columns = st.columns(2)
+            columns = st.columns(2)
 
-                im = imageio.imread('tutorial_pics/too_dark.jpg')
-                columns[0].image(im)
-                columns[0].write("❌ Make sure there is enough light in the room. ❌")
+            im = imageio.imread('tutorial_pics/too_dark.jpg')
+            columns[0].image(im)
+            columns[0].write("❌ Make sure there is enough light in the room. ❌")
 
-                im = imageio.imread('tutorial_pics/bad_light.jpg')
-                columns[1].image(im)
-                columns[1].write("❌ Make sure the source of light is in front of you, not behind. ❌")
+            im = imageio.imread('tutorial_pics/bad_light.jpg')
+            columns[1].image(im)
+            columns[1].write("❌ Make sure the source of light is in front of you, not behind. ❌")
         else:
             st.subheader(headers[st.session_state['setup_index']])
             im = imageio.imread(images[st.session_state['setup_index']])
             st.image(im)
             st.write(text[st.session_state['setup_index']])
-
 
 if __name__ == "__main__":
     main()

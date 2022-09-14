@@ -42,6 +42,8 @@ def recorder_factory():
 def main():
 
     st.markdown(get_css(),unsafe_allow_html=True)
+    if 'user_email' in st.session_state:
+        st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
 
     if 'logged_in' not in st.session_state:
         logged_in=False

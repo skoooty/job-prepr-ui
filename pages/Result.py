@@ -9,13 +9,16 @@ from utils.get_css import get_css
 from utils.db_queries import save_results, get_user_email
 
 
-resolution=48 #100 #e.g.48 means that the resolution is (48,48,1)
+resolution=48 #e.g.48 means that the resolution is (48,48,1)
+
 url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for analysing te facial expressions
 frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 
 def main():
 
     st.markdown(get_css(),unsafe_allow_html=True)
+    if 'user_email' in st.session_state:
+        st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
 
     if 'logged_in' not in st.session_state:
         logged_in=False
@@ -74,8 +77,8 @@ def main():
         #Voice
         st.write(" ")
         st.write(" ")
-        st.subheader("🗣️")
-        st.write("Let's analyse what you said...")
+        st.markdown("🗣️")
+        st.markdown("Let's analyse what you said...")
         if transcription:
             if response["label"]=="POSITIVE":
                 if score>50:
