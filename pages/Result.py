@@ -26,11 +26,11 @@ def main():
         logged_in=st.session_state["logged_in"]
 
     if ("photo_frames" not in st.session_state or not len(st.session_state["photo_frames"])):
-        st.markdown("<p style=text-align:center;>Please go to the Interview page and record your response.</p>", unsafe_allow_html=True)
+        st.markdown("<p style=text-align:left;>Please go to the Interview page and record your response.</p>", unsafe_allow_html=True)
     else:
         st.markdown("<h1 style='text-align: center; color: black;'>Results</h1>", unsafe_allow_html=True)
-        st.markdown("<p style=text-align:center>😄</p>", unsafe_allow_html=True)
-        st.markdown("<p style=text-align:center;>Let's analyse your facial expressions...</p>", unsafe_allow_html=True)
+        st.markdown("<h2 style=text-align:center>😄</p>", unsafe_allow_html=True)
+        st.markdown("<p style=text-align:left;>Let's analyse your facial expressions...</p>", unsafe_allow_html=True)
 
 
         with st.spinner("Loading..."):
@@ -79,40 +79,40 @@ def main():
         #Voice
         st.write(" ")
         st.write(" ")
-        st.markdown("<p style=text-align:center>🗣️</p>", unsafe_allow_html=True)
-        st.markdown("<p style=text-align:center;>Let's analyse what you said...</p>", unsafe_allow_html=True)
+        st.markdown("<h2 style=text-align:center>🗣️</p>", unsafe_allow_html=True)
+        st.markdown("<p style=text-align:left;>Let's analyse what you said...</p>", unsafe_allow_html=True)
         if transcription:
             if response["label"]=="POSITIVE":
                 if score>50:
-                    st.markdown(f'<h2 style=text-align:center;>Wow! You sounded {score}% <b>positive</b>! 😄</h2>', unsafe_allow_html=True)
-                    st.markdown("<p style=text-align:center;>Keep it up!</p>", unsafe_allow_html=True)
+                    st.markdown(f'<h2 style=text-align:left;>Wow! You sounded {score}% <b>positive</b>! 😄</h2>', unsafe_allow_html=True)
+                    st.markdown("<p style=text-align:left;>Keep it up!</p>", unsafe_allow_html=True)
                 else:
-                    st.markdown(f'<h2 style=text-align:center;>You sounded {score}% **positive**.</h2>', unsafe_allow_html=True)
-                    st.markdown("<p style=text-align:center;>You might want to use more positive words.", unsafe_allow_html=True)
+                    st.markdown(f'<h2 style=text-align:left;>You sounded {score}% **positive**.</h2>', unsafe_allow_html=True)
+                    st.markdown("<p style=text-align:left;>You might want to use more positive words.", unsafe_allow_html=True)
 
             if response["label"]=="NEGATIVE":
                 if score>50:
-                    st.markdown(f'<h2 style=text-align:center;>Why so angry? You sounded {score}% negative. 😡</h2>', unsafe_allow_html=True)
-                    st.markdown("<p style=text-align:center;>Next time, try using more positive words.</p>", unsafe_allow_html=True)
+                    st.markdown(f'<h2 style=text-align:left;>Why so angry? You sounded {score}% negative. 😡</h2>', unsafe_allow_html=True)
+                    st.markdown("<p style=text-align:left;>Next time, try using more positive words.</p>", unsafe_allow_html=True)
                 else:
-                    st.markdown(f'<h2 style=text-align:center;>Oops... You sounded {score}% negative.</h2>', unsafe_allow_html=True)
-                    st.marldown("<p style=text-align:center;>You might want to use more positive words.</p>", unsafe_allow_html=True)
+                    st.markdown(f'<h2 style=text-align:left;>Oops... You sounded {score}% negative.</h2>', unsafe_allow_html=True)
+                    st.marldown("<p style=text-align:left;>You might want to use more positive words.</p>", unsafe_allow_html=True)
 
-            st.markdown(f"<p style=text-align:center;>Sample sentence you said:</p>", unsafe_allow_html=True)
-            st.markdown(f"""<p style=text-align:center>{web_transcript} </p>""", unsafe_allow_html=True)
+            st.markdown(f"<p style=text-align:left;>Sample sentence you said:</p>", unsafe_allow_html=True)
+            st.markdown(f"""<p style=text-align:left>{web_transcript} </p>""", unsafe_allow_html=True)
 
         #If the text counldn't be extracted
         else:
-            st.markdown("<p style=text-align:center;>Sorry, we couldn't hear you... Please record a new response.</p>", unsafe_allow_html=True)
+            st.markdown("<p style=text-align:left;>Sorry, we couldn't hear you... Please record a new response.</p>", unsafe_allow_html=True)
 
         if logged_in:
             #Saving the result
             result={"Emotions": emotions, "Sentiment":label, "Score": score, "Text":web_transcript,"Images":images_list}
-            st.markdown(f"<p style=text-align:center;>You're logged in as {get_user_email(st.session_state['user_id'])}</p>", unsafe_allow_html=True)
+            st.markdown(f"<p style=text-align:left;>You're logged in as {get_user_email(st.session_state['user_id'])}</p>", unsafe_allow_html=True)
 
             if result["Emotions"]:
                 save_results(st.session_state["user_id"], result)
-                st.markdown(f"<p style=text-align:center;>We've stored your result.</p>", unsafe_allow_html=True)
+                st.markdown(f"<p style=text-align:left;>We've stored your result.</p>", unsafe_allow_html=True)
 
         result=[]
         st.session_state["photo_frames"]=[]

@@ -19,7 +19,7 @@ def main():
 
     with row1.container():
         st.markdown("<h1 style='text-align: center; color: black;'>How to use JobPrepr</h1>", unsafe_allow_html=True)
-        st.markdown("<p style=text-align:center;>Our app will help you feel more confident at your next video interview. You'll get a chance to practice interview questions and we'll give you feedback for each interview you film. </p>", unsafe_allow_html=True)
+        st.markdown("<p style=text-align:left;>Our app will help you feel more confident at your next video interview. You'll get a chance to practice interview questions and we'll give you feedback for each interview you film. </p>", unsafe_allow_html=True)
 
     text = ["Go to the <b>Interview</b> page.",
             "Select the <b>area</b> that you are applying for from the drop down list. You will be able to see the selected area in the text on the page.",
@@ -53,7 +53,7 @@ def main():
     with page.container():
         im = imageio.imread(images[st.session_state['tutorial_index']])
         st.image(im, use_column_width=True)
-        st.markdown(f"<p style=text-align:center;>{text[st.session_state['tutorial_index']]}</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style=text-align:left;>{text[st.session_state['tutorial_index']]}</p>", unsafe_allow_html=True)
     st.session_state["photo_frames"]=[]
 
 if __name__ == "__main__":
