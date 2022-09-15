@@ -7,7 +7,7 @@ def main():
 
     row1= st.empty()
     st.markdown(get_css(),unsafe_allow_html=True)
-    if 'user_email' in st.session_state:
+    if 'email' in st.session_state:
         st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
     if 'logged_in' not in st.session_state:
         logged_in=False
@@ -19,14 +19,14 @@ def main():
 
     with row1.container():
         st.markdown("<h1 style='text-align: center; color: black;'>How to use JobPrepr</h1>", unsafe_allow_html=True)
-        st.write("Our app will help you feel more confident at your next video interview. You'll get a chance to practice interview questions and we'll give you feedback for each interview you film.")
+        st.markdown("<p style=text-align:center;>Our app will help you feel more confident at your next video interview. You'll get a chance to practice interview questions and we'll give you feedback for each interview you film. </p>", unsafe_allow_html=True)
 
-    text = ["* Go to the **Interview** page.",
-            "* Select the **area** that you are applying for from the drop down list. You will be able to see the selected area in the text on the page.",
-            "* When you're ready to start the interview, click the **Start/Stop** checkbox.",
-            "* A question will pop up on the screen and the video will start recording. You should answer the question you see on the screen. The clock at the bottom of the page indicates how many seconds you have left. If you run out of time, the recording will stop automatically. If you want to stop it earlier, click the **Start/Stop** checkbox.",
-            "* Wait a couple of seconds for the result to be generated.",
-            "* Once the result is generated, go to the **Result page**."
+    text = ["Go to the <b>Interview</b> page.",
+            "Select the <b>area</b> that you are applying for from the drop down list. You will be able to see the selected area in the text on the page.",
+            "When you're ready to start the interview, click the <b>Start/Stop</b> checkbox.",
+            "A question will pop up on the screen and the video will start recording. You should answer the question you see on the screen. The clock at the bottom of the page indicates how many seconds you have left. If you run out of time, the recording will stop automatically. If you want to stop it earlier, click the <b>Start/Stop</b> checkbox.",
+            "Wait a couple of seconds for the result to be generated.",
+            "Once the result is generated, go to the <b>Result page</b>."
             ]
     images = ['screenshots/open_interview.png',
                 'screenshots/area_selection.png',
@@ -51,9 +51,9 @@ def main():
                 st.experimental_rerun()
 
     with page.container():
-        st.markdown(text[st.session_state['tutorial_index']])
         im = imageio.imread(images[st.session_state['tutorial_index']])
-        st.image(im)
+        st.image(im, use_column_width=True)
+        st.markdown(f"<p style=text-align:center;>{text[st.session_state['tutorial_index']]}</p>", unsafe_allow_html=True)
     st.session_state["photo_frames"]=[]
 
 if __name__ == "__main__":

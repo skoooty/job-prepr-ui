@@ -6,7 +6,7 @@ from utils.get_css import get_css
 def main():
 
     st.markdown(get_css(),unsafe_allow_html=True)
-    if 'user_email' in st.session_state:
+    if 'email' in st.session_state:
         st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
     if 'logged_in' not in st.session_state:
         logged_in=False
@@ -35,11 +35,11 @@ def main():
             ]
 
     text =[
-        "❌ Find a quiet room. You don't want the voices in the background to disturb the algorithm. ❌",
+        "Find a quiet room. You don't want the voices in the background to disturb the algorithm.",
         "",
-        "❌ Make sure you are not too far away from the camera. ❌",
-        "❌ Make sure you are the only person visible on camera. The algoritham won't know which face to analyse otherwise. ❌",
-        "✅ Good! You're all set for the interview! ✅"
+        "Make sure you are not too far away from the camera.",
+        "Make sure you are the only person visible on camera. The algoritham won't know which face to analyse otherwise.",
+        "Good! You're all set for the interview!"
     ]
 
     page = st.empty()
@@ -61,22 +61,30 @@ def main():
 
     with page.container():
         if st.session_state['setup_index'] == 1:
-            st.subheader("Lighting")
+            st.markdown("Lighting")
 
-            columns = st.columns(2)
+            col1, col2= st.columns(2)
 
-            im = imageio.imread('tutorial_pics/too_dark.jpg')
-            columns[0].image(im)
-            columns[0].write("❌ Make sure there is enough light in the room. ❌")
+            with col1:
+                im = imageio.imread('tutorial_pics/too_dark.jpg')
+                st.image(im)
+                st.markdown("<p style=text-align:center;> ❌ </p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:center;> Make sure there is enough light in the room.  </p>", unsafe_allow_html=True)
 
-            im = imageio.imread('tutorial_pics/bad_light.jpg')
-            columns[1].image(im)
-            columns[1].write("❌ Make sure the source of light is in front of you, not behind. ❌")
+            with col2:
+                im = imageio.imread('tutorial_pics/bad_light.jpg')
+                st.image(im)
+                st.markdown("<p style=text-align:center;> ❌ </p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:center;> Make sure the source of light is in front of you, not behind.  </p>", unsafe_allow_html=True)
         else:
-            st.subheader(headers[st.session_state['setup_index']])
+            st.markdown(headers[st.session_state['setup_index']])
             im = imageio.imread(images[st.session_state['setup_index']])
             st.image(im)
-            st.write(text[st.session_state['setup_index']])
+            if st.session_state['setup_index'] == 4:
+                st.markdown("<p style=text-align:center;> ✅ </p>", unsafe_allow_html=True)
+            else:
+                st.markdown("<p style=text-align:center;> ❌ </p>", unsafe_allow_html=True)
+            st.markdown(f"<p style=text-align:center;> {text[st.session_state['setup_index']]} </p>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

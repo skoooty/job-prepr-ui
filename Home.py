@@ -8,10 +8,11 @@ def main():
 
     # logo = imageio.imread('./Logo.png')
     # st.sidebar.image(logo)
-
     st.markdown(get_css(),unsafe_allow_html=True)
     logged_in=False
     st.session_state['index'] = 0
+    if 'email' in st.session_state:
+        st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
     st.markdown("<h1 style='text-align: center; color: #0E27C8;'>Welcome to JobPrepr!</h1>", unsafe_allow_html=True)
 
 
@@ -46,7 +47,7 @@ def main():
             log=login_user(email, password)
             if log == 1:
                 logged_in=True
-                st.subheader("You're logged in, let'go!")
+                st.subheader("You're logged in, let's go!")
                 st.session_state['email'] = email
                 st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
                 st.session_state["user_id"] = get_user_id(email)

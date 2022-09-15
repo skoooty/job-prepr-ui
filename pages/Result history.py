@@ -2,21 +2,25 @@ import streamlit as st
 import pandas as pd
 from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_graph
 from utils.db_queries import read_results, get_user_email
+from utils.get_css import get_css
 
 def main():
+
+    st.markdown(get_css(), unsafe_allow_html=True)
+
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
         logged_in=st.session_state["logged_in"]
 
-    if 'user_email' in st.session_state:
+    if 'email' in st.session_state:
         st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
 
     if not logged_in:
-        st.write("Please log in to access your result history.")
+        st.markdown("<h1 style=text-align:center>Please log in to access your result history.</h1>", unsafe_allow_html=True)
     else:
         with st.spinner("Loading..."):
-            st.title(f"Result history for {get_user_email(st.session_state['user_id'])}")
+            st.markdown(f"<h1 style=text-align:center>Result history for {get_user_email(st.session_state['user_id'])}</h1>", unsafe_allow_html=True)
         with st.spinner("Loading the result..."):
             results_stored=read_results(st.session_state["user_id"])
         if results_stored:
@@ -28,12 +32,12 @@ def main():
                     columns=emotions_names),
                     ignore_index=True)
 
-                st.subheader(i)
-                st.markdown(f"The results of your test no {i} on {res1[0].strftime('%d/%m/%Y, %H:%M:%S')}:")
+                st.markdown(f"<h2 style=text-align:center>{i}</h2>", unsafe_allow_html=True)
+                st.markdown(f"<h2 style=text-align:center>The results of your test no {i} on {res1[0].strftime('%d/%m/%Y, %H:%M:%S')}:</h2>", unsafe_allow_html=True)
                 i+=1
 
-                st.subheader("😄")
-                st.markdown("Let's analyse your facial expressions...")
+                st.markdown("<h3 style=text-align:center>😄</h3>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:center;>Let's analyse your facial expressions...</p>", unsafe_allow_html=True)
                 show_strongest_emotion(emotions)
 
                 show_emotion_graph(emotions, emotions_list=res1[1]["Emotions"], images=res1[1]["Images"])
@@ -41,7 +45,7 @@ def main():
                 st.write("")
 
                 #Voice
-                st.subheader("🗣️")
+                st.markdown("<h3 style=text-align:center;>🗣️</h3>", unsafe_allow_html=True)
                 st.write("Let's analyse what you said...")
                 transcription=res1[1]["Text"]
                 score=res1[1]["Score"]
