@@ -8,7 +8,7 @@ def main():
 
     logo = imageio.imread('./Logo.png')
 
-    st.set_page_config(page_title="JobPrepr: Home", page_icon="🤖", layout="centered")
+    st.set_page_config(page_title="JobPrepr: Home", page_icon="💼", layout="centered")
     st.markdown(get_css(),unsafe_allow_html=True)
     logged_in=False
     st.session_state['index'] = 0

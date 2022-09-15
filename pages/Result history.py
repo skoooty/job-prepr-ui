@@ -5,7 +5,7 @@ from utils.db_queries import read_results, get_user_email
 from datetime import timedelta
 
 def main():
-    st.set_page_config(page_title="JobPrepr: Result history", page_icon="🤖", layout="centered")
+    st.set_page_config(page_title="JobPrepr: Result history", page_icon="💼", layout="centered")
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
