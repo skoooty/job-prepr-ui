@@ -5,6 +5,7 @@ from utils.db_queries import read_results, get_user_email
 from datetime import timedelta
 
 def main():
+    st.set_page_config(page_title="JobPrepr: Result history", page_icon="🤖", layout="centered")
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
@@ -18,7 +19,6 @@ def main():
     else:
         with st.spinner("Loading..."):
             st.title(f"Result history for {get_user_email(st.session_state['user_id'])}")
-        with st.spinner("Loading the result..."):
             results_stored=read_results(st.session_state["user_id"])
         if results_stored:
             i=1

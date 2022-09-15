@@ -4,7 +4,7 @@ from utils.get_css import get_css
 
 
 def main():
-
+    st.set_page_config(page_title="JobPrepr: Set-Up", page_icon="🤖", layout="centered")
     st.markdown(get_css(),unsafe_allow_html=True)
     if 'user_email' in st.session_state:
         st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)

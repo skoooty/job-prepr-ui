@@ -16,7 +16,7 @@ url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for
 frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 
 def main():
-
+    st.set_page_config(page_title="JobPrepr: Result", page_icon="🤖", layout="centered")
     st.markdown(get_css(),unsafe_allow_html=True)
     if 'user_email' in st.session_state:
         st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
