@@ -14,7 +14,7 @@ def show_strongest_emotion(emotions):
         if strongest_emotion["Perc"]<perc:
             strongest_emotion["Perc"]=perc
             strongest_emotion["Emotion"]=emotion
-    st.markdown(f'<h1 style=text-align:center;>You seemed mostly <b>{strongest_emotion["Emotion"]}</b> ({round(strongest_emotion["Perc"])}%).</h1>', unsafe_allow_html=True)
+    st.markdown(f'<h5 style=text-align:center;>You seemed mostly <b>{strongest_emotion["Emotion"]}<b> ({round(strongest_emotion["Perc"])}%).</h5>', unsafe_allow_html=True)
 
 def most_emotional_face(emotion, emotions_list, frames):
 
@@ -22,9 +22,6 @@ def most_emotional_face(emotion, emotions_list, frames):
     index_most=0
     perc_most=0
     for i, v in enumerate(emotions_list):
-        st.write(type(emotion_index))
-        st.write(type(perc_most))
-        st.write(v[emotion_index])
         if v[emotion_index]>perc_most:
             perc_most=v[emotion_index]
             index_most=i

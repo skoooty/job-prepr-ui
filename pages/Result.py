@@ -26,7 +26,7 @@ def main():
         logged_in=st.session_state["logged_in"]
 
     if ("photo_frames" not in st.session_state or not len(st.session_state["photo_frames"])):
-        st.write("Please go to the Interview page and record your response.")
+        st.markdown("<p style=text-align:center;>Please go to the Interview page and record your response.</p>", unsafe_allow_html=True)
     else:
         st.markdown("<h1 style='text-align: center; color: black;'>Results</h1>", unsafe_allow_html=True)
         st.markdown("<p style=text-align:center>😄</p>", unsafe_allow_html=True)
@@ -60,25 +60,22 @@ def main():
             label=response["label"]
 
 
-        #Storing the final output
-        result={"Frames": frames_as_list, "Emotions": emotions, "Sentiment":label, "Score": score, "Text":web_transcript}
+        emotions_pd=pd.DataFrame(columns=emotions_names)
 
-        emotions=pd.DataFrame(columns=emotions_names)
-
-        for emotion in result["Emotions"]:
-            emotions=emotions.append(pd.DataFrame([emotion],
+        for emotion in emotions:
+            emotions_pd=emotions_pd.append(pd.DataFrame([emotion],
             columns=emotions_names),
             ignore_index=True)
 
         #Printing the report
-        show_strongest_emotion(emotions)
-        show_emotion_graph(emotions, result)
+        show_strongest_emotion(emotions_pd)
+        images_list = show_emotion_graph(emotions_pd, emotions, frames_as_list, images=None)
 
         #Voice
         st.write(" ")
         st.write(" ")
-        st.subheader("🗣️")
-        st.markdown("Let's analyse what you said...")
+        st.markdown("<p style=text-align:center>🗣️</p>", unsafe_allow_html=True)
+        st.markdown("<p style=text-align:center;>Let's analyse what you said...</p>", unsafe_allow_html=True)
         if transcription:
             if response["label"]=="POSITIVE":
                 if score>50:
@@ -105,6 +102,7 @@ def main():
 
         if logged_in:
             #Saving the result
+            result={"Emotions": emotions, "Sentiment":label, "Score": score, "Text":web_transcript,"Images":images_list}
             st.markdown(f"<p style=text-align:center;>You're logged in as {get_user_email(st.session_state['user_id'])}</p>", unsafe_allow_html=True)
 
             if result["Emotions"]:

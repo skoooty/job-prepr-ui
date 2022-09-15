@@ -65,9 +65,9 @@ def main():
     st.write("")
     st.markdown("<h5 style='text-align: center; color: black;'>Select your job area below:</h5>", unsafe_allow_html=True)
     job_name = st.selectbox("", job_list)
-    st.markdown(f"Let's practice for your {job_name} interview.")
-    st.markdown(f"You have {s_per_question}s to answer the question that will pop up on the screen.")
-    st.markdown(f"**Good luck!**")
+    st.markdown(f"<p style=text-align:center;>Let's practice for your {job_name} interview.</p>",unsafe_allow_html=True)
+    st.markdown(f"<p style=text-align:center;>You have {s_per_question}s to answer the question that will pop up on the screen.</p>",unsafe_allow_html=True)
+    st.markdown(f"<b style=text-align:center;>Good luck!</b>", unsafe_allow_html=True)
     playing = st.checkbox("Start/Stop", value=False)
     analysing=False
 
@@ -76,7 +76,7 @@ def main():
         st.session_state["photo_frames"]=[]
         if 'question' not in st.session_state or st.session_state["question"] == None:
             st.session_state['question'] = get_rand_question(questions, job_name)
-        st.subheader(st.session_state['question'])
+        st.markdown(f"<h3 style=text-align:center;>{st.session_state['question']}</h3>", unsafe_allow_html=True)
         webrtc_streamer(
             key="object-detection",
             video_frame_callback=VideoProcessor.video_frame_callback,
@@ -123,6 +123,7 @@ def main():
             analysing=True
         st.session_state["question"] = None
         if analysing:
+            analysing=False
             switch_page("Result")
 
 

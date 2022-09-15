@@ -1,3 +1,4 @@
+from email.headerregistry import UniqueSingleAddressHeader
 import streamlit as st
 import imageio
 from utils.db_queries import login_user, create_new_user, get_user_id
@@ -16,7 +17,7 @@ def main():
     st.markdown("<h1 style='text-align: center; color: #0E27C8;'>Welcome to JobPrepr!</h1>", unsafe_allow_html=True)
 
 
-    st.markdown("Please type in your email and password to log in, or tick the **Sign Up** checkbox to create a new account.")
+    st.markdown("<p style=text-align:center;>Type in your email and password to log in, or click Sign Up to create a new account.</p>", unsafe_allow_html=True)
     chk = st.checkbox("Sign Up")
     if chk:
         email_new = st.text_input('Email ', '', key=1)
@@ -28,16 +29,16 @@ def main():
                 if st.button('Sign Up'):
                     log=login_user(email_new, password1)
                     if log == 1:
-                        st.write("This email is already in use.")
+                        st.markdown("<p style=text-align:center;>This email is already in use.</p>", unsafe_allow_html=True)
                     else:
                         if create_new_user(email_new, password1):
-                            st.subheader("You've created a new account! Please, log in")
+                            st.markdown("<h3 style=text-align:center;>You've created a new account! Please, log in</h3>", unsafe_allow_html=True)
                         else:
-                            st.write("This email is already in use.")
+                            st.markdown("<p style=text-align:center;>This email is already in use.</p>", unsafe_allow_html=True)
             else:
-                st.write("This is not a proper email adress.")
+                st.markdown("<p style=text-align:center;>This is not a proper email adress.</p>", unsafe_allow_html=True)
         else:
-            st.write("Passwords don't match.")
+            st.markdown("<p style=text-align:center;>Passwords don't match.</p>", unsafe_allow_html=True)
 
     else:
         email = st.text_input('Email', '', key=4)
@@ -47,12 +48,12 @@ def main():
             log=login_user(email, password)
             if log == 1:
                 logged_in=True
-                st.subheader("You're logged in, let's go!")
+                st.markdown("<h3 style=text-align:center;>You're logged in, let's go!</h3>", unsafe_allow_html=True)
                 st.session_state['email'] = email
                 st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
                 st.session_state["user_id"] = get_user_id(email)
             else:
-                st.write("The email and password don't match.")
+                st.markdown("<p style=text-align:center;>The email and password don't match.</p>", unsafe_allow_html=True)
 
     st.session_state["logged_in"]=logged_in
     st.session_state["photo_frames"]=[]

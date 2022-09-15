@@ -1,8 +1,10 @@
+from http.client import UnknownTransferEncoding
 import streamlit as st
 import pandas as pd
 from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_graph
 from utils.db_queries import read_results, get_user_email
 from utils.get_css import get_css
+from datetime import timedelta
 
 def main():
 
@@ -13,11 +15,11 @@ def main():
     else:
         logged_in=st.session_state["logged_in"]
 
-    if 'email' in st.session_state:
+    if 'user_email' in st.session_state:
         st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
 
     if not logged_in:
-        st.markdown("<h1 style=text-align:center>Please log in to access your result history.</h1>", unsafe_allow_html=True)
+        st.markdown("<p style=text-align:center>Please log in to access your result history.</p>", unsafe_allow_html=True)
     else:
         with st.spinner("Loading..."):
             st.markdown(f"<h1 style=text-align:center>Result history for {get_user_email(st.session_state['user_id'])}</h1>", unsafe_allow_html=True)
@@ -33,10 +35,10 @@ def main():
                     ignore_index=True)
 
                 st.markdown(f"<h2 style=text-align:center>{i}</h2>", unsafe_allow_html=True)
-                st.markdown(f"<h2 style=text-align:center>The results of your test no {i} on {res1[0].strftime('%d/%m/%Y, %H:%M:%S')}:</h2>", unsafe_allow_html=True)
+                st.markdown(f"<h4 style=text-align:center>The results of your test no {i} on {(res1[0]+ timedelta(hours=1)).strftime('%d/%m/%Y, %H:%M')}:</h4>", unsafe_allow_html=True)
                 i+=1
 
-                st.markdown("<h3 style=text-align:center>😄</h3>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:center>😄</p>", unsafe_allow_html=True)
                 st.markdown("<p style=text-align:center;>Let's analyse your facial expressions...</p>", unsafe_allow_html=True)
                 show_strongest_emotion(emotions)
 
@@ -45,36 +47,36 @@ def main():
                 st.write("")
 
                 #Voice
-                st.markdown("<h3 style=text-align:center;>🗣️</h3>", unsafe_allow_html=True)
-                st.write("Let's analyse what you said...")
+                st.markdown("<p style=text-align:center>🗣️</p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:center;>Let's analyse what you said...</p>", unsafe_allow_html=True)
                 transcription=res1[1]["Text"]
                 score=res1[1]["Score"]
                 label=res1[1]["Sentiment"]
                 if transcription:
                     if label=="POSITIVE":
                         if score>50:
-                            st.header(f'Wow! You sounded {score}% **positive**! 😄')
-                            st.write("Keep it up!")
+                            st.markdown(f'<h2 style=text-align:center;>Wow! You sounded {score}% <b>positive</b>! 😄</h2>', unsafe_allow_html=True)
+                            st.markdown("<p style=text-align:center;>Keep it up!</p>", unsafe_allow_html=True)
                         else:
-                            st.header(f'You sounded {score}% **positive**.')
-                            st.write("You might want to use more positive words.")
+                            st.markdown(f'<h2 style=text-align:center;>You sounded {score}% **positive**.</h2>', unsafe_allow_html=True)
+                            st.markdown("<p style=text-align:center;>You might want to use more positive words.", unsafe_allow_html=True)
 
                     if label=="NEGATIVE":
                         if score>50:
-                            st.header(f'Why so angry? You sounded {round(score)}% **negative**. 😡')
-                            st.write("Next time, try using more positive words.")
+                            st.markdown(f'<h2 style=text-align:center;>Why so angry? You sounded {score}% negative. 😡</h2>', unsafe_allow_html=True)
+                            st.markdown("<p style=text-align:center;>Next time, try using more positive words.</p>", unsafe_allow_html=True)
                         else:
-                            st.header(f'Upss... You sounded {round(score)}% **negative**.')
-                            st.write("You might want to use more positive words.")
+                            st.markdown(f'<h2 style=text-align:center;>Oops... You sounded {score}% negative.</h2>', unsafe_allow_html=True)
+                            st.marldown("<p style=text-align:center;>You might want to use more positive words.</p>", unsafe_allow_html=True)
 
-                    st.markdown(f"Sample sentence you said:")
-                    st.markdown(f"""{transcription}""")
+                    st.markdown(f"<p style=text-align:center;>Sample sentence you said:</p>", unsafe_allow_html=True)
+                    st.markdown(f"""<p style=text-align:center>{transcription} </p>""", unsafe_allow_html=True)
 
                 #If the text counldn't be extracted
                 else:
                     st.markdown("Sorry, we couldn't hear you... Please record a new response.")
                 st.write("")
-                st.write("---------------------------------------------------------------------")
+                st.markdown("<hr>", unsafe_allow_html=True)
 
     st.session_state["photo_frames"]=[]
 
