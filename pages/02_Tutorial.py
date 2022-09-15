@@ -33,7 +33,6 @@ def main():
                 'screenshots/start_stop.png',
                 'screenshots/video_recording.png',
                 'screenshots/report_ready.png',
-                'screenshots/open_result.png',
               ]
     page = st.empty()
     col1, col2, col3 = st.columns([1,1,1])
@@ -45,7 +44,7 @@ def main():
                 st.experimental_rerun()
 
     with col3:
-        if st.session_state['tutorial_index'] != 5:
+        if st.session_state['tutorial_index'] != 4:
             if st.button('Next'):
                 st.session_state['tutorial_index'] += 1
                 st.experimental_rerun()
