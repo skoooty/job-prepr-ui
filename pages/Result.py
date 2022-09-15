@@ -33,45 +33,43 @@ def main():
         st.subheader("😄")
         st.markdown("Let's analyse your facial expressions...")
 
-        #Extracting the frames
-        full_frames=st.session_state["photo_frames"]
-        frames=full_frames[::frame_rate]
-
-        #Storing emotions
-        emotions=[]
-        frames_as_list=[]
-        for frame in frames:
-            frame_res=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
-            with st.spinner("Loading..."):
-                emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
-            emotions.append(emotion)
-            frames_as_list.append(cv2.resize(frame,dsize=(output_resolution,output_resolution)).tolist()) #frames_as_list.append(frame.tolist())
-
-        #Storing sentiment
         with st.spinner("Loading..."):
+            #Extracting the frames
+            full_frames=st.session_state["photo_frames"]
+            frames=full_frames[::frame_rate]
+
+            #Storing emotions
+            emotions=[]
+            frames_as_list=[]
+            for frame in frames:
+                frame_res=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
+                emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
+                emotions.append(emotion)
+                frames_as_list.append(cv2.resize(frame,dsize=(output_resolution,output_resolution)).tolist()) #frames_as_list.append(frame.tolist())
+
+            #Storing sentiment
             transcription, web_transcript = transcribe("record.mp3")
-        score = 0
-        label=""
-        if transcription:
-            #Getting text from voice
-            with st.spinner("Loading..."):
+            score = 0
+            label=""
+            if transcription:
+                #Getting text from voice
                 response = requests.get(f'https://npapi-lbzgzaglla-ew.a.run.app/predictnlp?text={transcription}').json()[0]
 
-            #Analysing the score
-            score=round(response["score"]*100)
+                #Analysing the score
+                score=round(response["score"]*100)
 
-            label=response["label"]
+                label=response["label"]
 
 
-        
 
-        emotions_pd=pd.DataFrame(columns=emotions_names)
 
-        for emotion in emotions:
-            emotions_pd=emotions_pd.append(pd.DataFrame([emotion],
-            columns=emotions_names),
-            ignore_index=True)
+            emotions_pd=pd.DataFrame(columns=emotions_names)
+
+            for emotion in emotions:
+                emotions_pd=emotions_pd.append(pd.DataFrame([emotion],
+                columns=emotions_names),
+                ignore_index=True)
 
         #Printing the report
         show_strongest_emotion(emotions_pd)
