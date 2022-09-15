@@ -73,10 +73,10 @@ def show_emotion_graph(emotions, emotions_list, frames=None, images=None):
             columns[i].subheader(emotion)
 
             #Graph
-            fig = plt.figure(figsize=(10, 10))
+            fig = plt.figure(figsize=(10, 12))
             ax = fig.add_axes([0, 0, 1, 1])
             ax.axis('off')
-            plt.ylim([0, 100])
+            plt.ylim([-5, 120])
 
             sns.lineplot(data=emotions[emotion]*100, color="black")
 
@@ -90,10 +90,16 @@ def show_emotion_graph(emotions, emotions_list, frames=None, images=None):
                 Ys_mean.append(emotions[emotion].mean()*100)
             sns.lineplot(y=Ys, x=Xs, color="gray")
             sns.lineplot(y=Ys_mean, x=Xs, color="blue")
-            plt.text(x = len(emotions[emotion]),
-                                y = emotions[emotion].mean()*100,
-                                s = 'Ø {:.0f}'.format(emotions[emotion].mean()*100) + " %",
-                                color = "blue", size=40)
+            if emotions[emotion].mean()*100 <10:
+                plt.text(x = len(emotions[emotion]),
+                                    y = emotions[emotion].mean()*100,
+                                    s = 'Ø {:.0f}'.format(emotions[emotion].mean()*100) + " %  ",
+                                    color = "blue", size=40)
+            else:
+                plt.text(x = len(emotions[emotion]),
+                                    y = emotions[emotion].mean()*100,
+                                    s = 'Ø {:.0f}'.format(emotions[emotion].mean()*100) + " %",
+                                    color = "blue", size=40)
 
 
             #Label points on the plot
@@ -113,7 +119,7 @@ def show_emotion_graph(emotions, emotions_list, frames=None, images=None):
 
             #Text
             columns[i].write(f"You were **{round(emotions[emotion].mean()*100)}%** {emotion}.")
-            columns[i].write(f"This is your most {emotion} face:")
+            columns[i].write(f"Your most {emotion} face:")
 
             #Image
             if images is None:
