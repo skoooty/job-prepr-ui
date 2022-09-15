@@ -10,7 +10,6 @@ from utils.db_queries import save_results, get_user_email
 
 
 resolution=48 #e.g.48 means that the resolution is (48,48,1)
-output_resolution=200
 
 url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for analysing te facial expressions
 frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
@@ -18,7 +17,7 @@ frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 def main():
     st.set_page_config(page_title="JobPrepr: Result", page_icon="💼", layout="centered")
     st.markdown(get_css(),unsafe_allow_html=True)
-    if 'user_email' in st.session_state:
+    if 'email' in st.session_state:
         st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
 
     if 'logged_in' not in st.session_state:
@@ -27,11 +26,12 @@ def main():
         logged_in=st.session_state["logged_in"]
 
     if ("photo_frames" not in st.session_state or not len(st.session_state["photo_frames"])):
-        st.write("Please go to the Interview page and record your response.")
+        st.markdown("<p style=text-align:center;>Please go to the Interview page and record your response.</p>", unsafe_allow_html=True)
     else:
         st.markdown("<h1 style='text-align: center; color: black;'>Results</h1>", unsafe_allow_html=True)
-        st.subheader("😄")
-        st.markdown("Let's analyse your facial expressions...")
+        st.markdown("<p style=text-align:center>😄</p>", unsafe_allow_html=True)
+        st.markdown("<p style=text-align:center;>Let's analyse your facial expressions...</p>", unsafe_allow_html=True)
+
 
         with st.spinner("Loading..."):
             #Extracting the frames
@@ -46,7 +46,7 @@ def main():
                 frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
                 emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
                 emotions.append(emotion)
-                frames_as_list.append(cv2.resize(frame,dsize=(output_resolution,output_resolution)).tolist()) #frames_as_list.append(frame.tolist())
+                frames_as_list.append(frame.tolist())
 
             #Storing sentiment
             transcription, web_transcript = transcribe("record.mp3")
@@ -55,6 +55,7 @@ def main():
             if transcription:
                 #Getting text from voice
                 response = requests.get(f'https://npapi-lbzgzaglla-ew.a.run.app/predictnlp?text={transcription}').json()[0]
+
 
                 #Analysing the score
                 score=round(response["score"]*100)
@@ -78,42 +79,40 @@ def main():
         #Voice
         st.write(" ")
         st.write(" ")
-        st.subheader("🗣️")
-        st.markdown("Let's analyse what you said...")
+        st.markdown("<p style=text-align:center>🗣️</p>", unsafe_allow_html=True)
+        st.markdown("<p style=text-align:center;>Let's analyse what you said...</p>", unsafe_allow_html=True)
         if transcription:
             if response["label"]=="POSITIVE":
                 if score>50:
-                    st.header(f'Wow! You sounded {score}% **positive**! 😄')
-                    st.write("Keep it up!")
+                    st.markdown(f'<h2 style=text-align:center;>Wow! You sounded {score}% <b>positive</b>! 😄</h2>', unsafe_allow_html=True)
+                    st.markdown("<p style=text-align:center;>Keep it up!</p>", unsafe_allow_html=True)
                 else:
-                    st.header(f'You sounded {score}% **positive**.')
-                    st.write("You might want to use more positive words.")
+                    st.markdown(f'<h2 style=text-align:center;>You sounded {score}% **positive**.</h2>', unsafe_allow_html=True)
+                    st.markdown("<p style=text-align:center;>You might want to use more positive words.", unsafe_allow_html=True)
 
             if response["label"]=="NEGATIVE":
                 if score>50:
-                    st.header(f'Why so angry? You sounded {score}% **negative**. 😡')
-                    st.write("Next time, try using more positive words.")
+                    st.markdown(f'<h2 style=text-align:center;>Why so angry? You sounded {score}% negative. 😡</h2>', unsafe_allow_html=True)
+                    st.markdown("<p style=text-align:center;>Next time, try using more positive words.</p>", unsafe_allow_html=True)
                 else:
-                    st.header(f'Upss... You sounded {score}% **negative**.')
-                    st.write("You might want to use more positive words.")
+                    st.markdown(f'<h2 style=text-align:center;>Oops... You sounded {score}% negative.</h2>', unsafe_allow_html=True)
+                    st.marldown("<p style=text-align:center;>You might want to use more positive words.</p>", unsafe_allow_html=True)
 
-            st.markdown(f"Sample sentence you said:")
-            st.markdown(f"""{web_transcript}""")
+            st.markdown(f"<p style=text-align:center;>Sample sentence you said:</p>", unsafe_allow_html=True)
+            st.markdown(f"""<p style=text-align:center>{web_transcript} </p>""", unsafe_allow_html=True)
 
         #If the text counldn't be extracted
         else:
-            st.markdown("Sorry, we couldn't hear you... Please record a new response.")
+            st.markdown("<p style=text-align:center;>Sorry, we couldn't hear you... Please record a new response.</p>", unsafe_allow_html=True)
 
         if logged_in:
             #Saving the result
-            #Storing the final output
-            #import ipdb; ipdb.set_trace()
             result={"Emotions": emotions, "Sentiment":label, "Score": score, "Text":web_transcript,"Images":images_list}
-            st.write(f"You're logged in as {get_user_email(st.session_state['user_id'])}")
+            st.markdown(f"<p style=text-align:center;>You're logged in as {get_user_email(st.session_state['user_id'])}</p>", unsafe_allow_html=True)
 
             if result["Emotions"]:
                 save_results(st.session_state["user_id"], result)
-                st.write(f"We've stored your result.")
+                st.markdown(f"<p style=text-align:center;>We've stored your result.</p>", unsafe_allow_html=True)
 
         result=[]
         st.session_state["photo_frames"]=[]

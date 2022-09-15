@@ -22,6 +22,14 @@ def get_css():
             div[data-baseweb="base-input"] > input {
                 background-color: white;
             }
+            label[data-baseweb="checkbox"]{
+                display: flex;
+                justify-content: center;
+            }
+            [class="css-1gk2i2l e17lx80j0"]{
+                display: flex;
+                justify-content: center;
+            }
             div[data-baseweb="select"] > div {
                 background-color: white;
             }
