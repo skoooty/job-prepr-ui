@@ -46,7 +46,7 @@ def main():
             log=login_user(email, password)
             if log == 1:
                 logged_in=True
-                st.subheader("You're logged in, let'go!")
+                st.subheader("You're logged in, let's go!")
                 st.session_state['email'] = email
                 st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
                 st.session_state["user_id"] = get_user_id(email)
