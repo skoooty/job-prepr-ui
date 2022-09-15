@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from utils.emotions import emotions_names, show_strongest_emotion, show_emotion_graph
 from utils.db_queries import read_results, get_user_email
+from datetime import timedelta
 
 def main():
     if 'logged_in' not in st.session_state:
@@ -29,7 +30,7 @@ def main():
                     ignore_index=True)
 
                 st.subheader(i)
-                st.markdown(f"The results of your test no {i} on {res1[0].strftime('%d/%m/%Y, %H:%M:%S')}:")
+                st.markdown(f"The results of your test no {i} on {(res1[0]+ timedelta(hours=1)).strftime('%d/%m/%Y, %H:%M')}:")
                 i+=1
 
                 st.subheader("😄")
