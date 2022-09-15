@@ -7,9 +7,8 @@ from utils.get_css import get_css
 from datetime import timedelta
 
 def main():
-
+    st.set_page_config(page_title="JobPrepr: Result history", page_icon="💼", layout="centered")
     st.markdown(get_css(), unsafe_allow_html=True)
-
     if 'logged_in' not in st.session_state:
         logged_in=False
     else:
@@ -22,8 +21,8 @@ def main():
         st.markdown("<p style=text-align:center>Please log in to access your result history.</p>", unsafe_allow_html=True)
     else:
         with st.spinner("Loading..."):
+
             st.markdown(f"<h1 style=text-align:center>Result history for {get_user_email(st.session_state['user_id'])}</h1>", unsafe_allow_html=True)
-        with st.spinner("Loading the result..."):
             results_stored=read_results(st.session_state["user_id"])
         if results_stored:
             i=1
@@ -36,6 +35,7 @@ def main():
 
                 st.markdown(f"<h2 style=text-align:center>{i}</h2>", unsafe_allow_html=True)
                 st.markdown(f"<h4 style=text-align:center>The results of your test no {i} on {(res1[0]+ timedelta(hours=1)).strftime('%d/%m/%Y, %H:%M')}:</h4>", unsafe_allow_html=True)
+
                 i+=1
 
                 st.markdown("<p style=text-align:center>😄</p>", unsafe_allow_html=True)

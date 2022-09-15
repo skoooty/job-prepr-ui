@@ -7,8 +7,11 @@ import streamlit.components.v1 as components
 
 def main():
 
-    # logo = imageio.imread('./Logo.png')
-    # st.sidebar.image(logo)
+
+
+    
+    st.set_page_config(page_title="JobPrepr: Home", page_icon="💼", layout="centered")
+
     st.markdown(get_css(),unsafe_allow_html=True)
     logged_in=False
     st.session_state['index'] = 0
@@ -48,7 +51,9 @@ def main():
             log=login_user(email, password)
             if log == 1:
                 logged_in=True
+
                 st.markdown("<h3 style=text-align:center;>You're logged in, let's go!</h3>", unsafe_allow_html=True)
+
                 st.session_state['email'] = email
                 st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
                 st.session_state["user_id"] = get_user_id(email)

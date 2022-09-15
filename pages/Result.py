@@ -15,7 +15,7 @@ url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for
 frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 
 def main():
-
+    st.set_page_config(page_title="JobPrepr: Result", page_icon="💼", layout="centered")
     st.markdown(get_css(),unsafe_allow_html=True)
     if 'email' in st.session_state:
         st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
@@ -32,40 +32,45 @@ def main():
         st.markdown("<p style=text-align:center>😄</p>", unsafe_allow_html=True)
         st.markdown("<p style=text-align:center;>Let's analyse your facial expressions...</p>", unsafe_allow_html=True)
 
-        #Extracting the frames
-        full_frames=st.session_state["photo_frames"]
-        frames=full_frames[::frame_rate]
 
-        #Storing emotions
-        emotions=[]
-        frames_as_list=[]
-        for frame in frames:
-            frame_res=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
-            emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
-            emotions.append(emotion)
-            frames_as_list.append(frame.tolist())
+        with st.spinner("Loading..."):
+            #Extracting the frames
+            full_frames=st.session_state["photo_frames"]
+            frames=full_frames[::frame_rate]
 
-        #Storing sentiment
-        transcription, web_transcript = transcribe("record.mp3")
-        score = 0
-        label=""
-        if transcription:
-            #Getting text from voice
-            response = requests.get(f'https://npapi-lbzgzaglla-ew.a.run.app/predictnlp?text={transcription}').json()[0]
+            #Storing emotions
+            emotions=[]
+            frames_as_list=[]
+            for frame in frames:
+                frame_res=cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
+                emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
+                emotions.append(emotion)
+                frames_as_list.append(frame.tolist())
 
-            #Analysing the score
-            score=round(response["score"]*100)
-
-            label=response["label"]
+            #Storing sentiment
+            transcription, web_transcript = transcribe("record.mp3")
+            score = 0
+            label=""
+            if transcription:
+                #Getting text from voice
+                response = requests.get(f'https://npapi-lbzgzaglla-ew.a.run.app/predictnlp?text={transcription}').json()[0]
 
 
-        emotions_pd=pd.DataFrame(columns=emotions_names)
+                #Analysing the score
+                score=round(response["score"]*100)
 
-        for emotion in emotions:
-            emotions_pd=emotions_pd.append(pd.DataFrame([emotion],
-            columns=emotions_names),
-            ignore_index=True)
+                label=response["label"]
+
+
+
+
+            emotions_pd=pd.DataFrame(columns=emotions_names)
+
+            for emotion in emotions:
+                emotions_pd=emotions_pd.append(pd.DataFrame([emotion],
+                columns=emotions_names),
+                ignore_index=True)
 
         #Printing the report
         show_strongest_emotion(emotions_pd)
