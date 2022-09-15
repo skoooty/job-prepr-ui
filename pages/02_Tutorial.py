@@ -4,7 +4,7 @@ from utils.get_css import get_css
 
 
 def main():
-
+    st.set_page_config(page_title="JobPrepr: Tutorial", page_icon="🤖", layout="centered")
     row1= st.empty()
     st.markdown(get_css(),unsafe_allow_html=True)
     if 'user_email' in st.session_state:

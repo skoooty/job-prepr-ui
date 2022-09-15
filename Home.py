@@ -6,9 +6,9 @@ import streamlit.components.v1 as components
 
 def main():
 
-    # logo = imageio.imread('./Logo.png')
-    # st.sidebar.image(logo)
+    logo = imageio.imread('./Logo.png')
 
+    st.set_page_config(page_title="JobPrepr: Home", page_icon="🤖", layout="centered")
     st.markdown(get_css(),unsafe_allow_html=True)
     logged_in=False
     st.session_state['index'] = 0
