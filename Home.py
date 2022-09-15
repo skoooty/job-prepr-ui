@@ -9,8 +9,8 @@ def main():
 
 
 
-    
-    st.set_page_config(page_title="JobPrepr: Home", page_icon="💼", layout="centered")
+
+    st.set_page_config(page_title="JobPrepr: Home", page_icon="💼")
 
     st.markdown(get_css(),unsafe_allow_html=True)
     logged_in=False
@@ -20,7 +20,7 @@ def main():
     st.markdown("<h1 style='text-align: center; color: #0E27C8;'>Welcome to JobPrepr!</h1>", unsafe_allow_html=True)
 
 
-    st.markdown("<p style=text-align:center;>Type in your email and password to log in, or click Sign Up to create a new account.</p>", unsafe_allow_html=True)
+    st.markdown("<p style=text-align:left;>Type in your email and password to log in, or click Sign Up to create a new account.</p>", unsafe_allow_html=True)
     chk = st.checkbox("Sign Up")
     if chk:
         email_new = st.text_input('Email ', '', key=1)
@@ -32,16 +32,16 @@ def main():
                 if st.button('Sign Up'):
                     log=login_user(email_new, password1)
                     if log == 1:
-                        st.markdown("<p style=text-align:center;>This email is already in use.</p>", unsafe_allow_html=True)
+                        st.markdown("<p style=text-align:left;>This email is already in use.</p>", unsafe_allow_html=True)
                     else:
                         if create_new_user(email_new, password1):
-                            st.markdown("<h3 style=text-align:center;>You've created a new account! Please, log in</h3>", unsafe_allow_html=True)
+                            st.markdown("<h3 style=text-align:left;>You've created a new account! Please, log in</h3>", unsafe_allow_html=True)
                         else:
-                            st.markdown("<p style=text-align:center;>This email is already in use.</p>", unsafe_allow_html=True)
+                            st.markdown("<p style=text-align:left;>This email is already in use.</p>", unsafe_allow_html=True)
             else:
-                st.markdown("<p style=text-align:center;>This is not a proper email adress.</p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:left;>This is not a proper email adress.</p>", unsafe_allow_html=True)
         else:
-            st.markdown("<p style=text-align:center;>Passwords don't match.</p>", unsafe_allow_html=True)
+            st.markdown("<p style=text-align:left;>Passwords don't match.</p>", unsafe_allow_html=True)
 
     else:
         email = st.text_input('Email', '', key=4)
@@ -52,13 +52,13 @@ def main():
             if log == 1:
                 logged_in=True
 
-                st.markdown("<h3 style=text-align:center;>You're logged in, let's go!</h3>", unsafe_allow_html=True)
+                st.markdown("<h3 style=text-align:left;>You're logged in, let's go!</h3>", unsafe_allow_html=True)
 
                 st.session_state['email'] = email
                 st.markdown("<style>[data-testid='stSidebarNav']::after {{ {0} {1} }}</style>".format('content:',f"'Signed in as: {st.session_state.email}';"), unsafe_allow_html=True)
                 st.session_state["user_id"] = get_user_id(email)
             else:
-                st.markdown("<p style=text-align:center;>The email and password don't match.</p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:left;>The email and password don't match.</p>", unsafe_allow_html=True)
 
     st.session_state["logged_in"]=logged_in
     st.session_state["photo_frames"]=[]

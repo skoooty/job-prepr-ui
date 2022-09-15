@@ -68,23 +68,23 @@ def main():
             with col1:
                 im = imageio.imread('tutorial_pics/too_dark.jpg')
                 st.image(im)
-                st.markdown("<p style=text-align:center;> ❌ </p>", unsafe_allow_html=True)
-                st.markdown("<p style=text-align:center;> Make sure there is enough light in the room.  </p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:left;> ❌ </p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:left;> Make sure there is enough light in the room.  </p>", unsafe_allow_html=True)
 
             with col2:
                 im = imageio.imread('tutorial_pics/bad_light.jpg')
                 st.image(im)
-                st.markdown("<p style=text-align:center;> ❌ </p>", unsafe_allow_html=True)
-                st.markdown("<p style=text-align:center;> Make sure the source of light is in front of you, not behind.  </p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:left;> ❌ </p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:left;> Make sure the source of light is in front of you, not behind.  </p>", unsafe_allow_html=True)
         else:
             st.markdown(headers[st.session_state['setup_index']])
             im = imageio.imread(images[st.session_state['setup_index']])
             st.image(im)
             if st.session_state['setup_index'] == 4:
-                st.markdown("<p style=text-align:center;> ✅ </p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:left;> ✅ </p>", unsafe_allow_html=True)
             else:
-                st.markdown("<p style=text-align:center;> ❌ </p>", unsafe_allow_html=True)
-            st.markdown(f"<p style=text-align:center;> {text[st.session_state['setup_index']]} </p>", unsafe_allow_html=True)
+                st.markdown("<p style=text-align:left;> ❌ </p>", unsafe_allow_html=True)
+            st.markdown(f"<p style=text-align:left;> {text[st.session_state['setup_index']]} </p>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

@@ -14,7 +14,7 @@ def show_strongest_emotion(emotions):
         if strongest_emotion["Perc"]<perc:
             strongest_emotion["Perc"]=perc
             strongest_emotion["Emotion"]=emotion
-    st.markdown(f'<h5 style=text-align:center;>You seemed mostly <b>{strongest_emotion["Emotion"]}<b> ({round(strongest_emotion["Perc"])}%).</h5>', unsafe_allow_html=True)
+    st.markdown(f'<h2 style=text-align:left;>You seemed mostly <b>{strongest_emotion["Emotion"]}<b> ({round(strongest_emotion["Perc"])}%).</h5>', unsafe_allow_html=True)
 
 def most_emotional_face(emotion, emotions_list, frames):
 
@@ -32,7 +32,7 @@ def most_emotional_face(emotion, emotions_list, frames):
 def show_emotion_perc(emotions):
     for emotion in emotions_names:
         perc=round(emotions[emotion].mean()*100)
-        st.markdown(f"<p style=text-align:center;>You were <b>{perc}%</b> {emotion}.</p>", unsafe_allow_html=True)
+        st.markdown(f"<p style=text-align:left;>You were <b>{perc}%</b> {emotion}.</p>", unsafe_allow_html=True)
 
 def emotion_colour(emotion):
     if emotion is "neutral":
@@ -61,7 +61,7 @@ def show_emotion_graph(emotions, emotions_list, frames=None, images=None):
                     strongest_emotions[j]=k
 
 
-    st.markdown(f"<p style=text-align:center;>You also seemed quite <b>{strongest_emotions[1]}</b> and <b>{strongest_emotions[2]}</b>. </p>", unsafe_allow_html=True)
+    st.markdown(f"<h4 style=text-align:left;>You also seemed quite <b>{strongest_emotions[1]}</b> and <b>{strongest_emotions[2]}</b>. </p>", unsafe_allow_html=True)
     columns = st.columns(no_columns)
 
     #Displaying
@@ -121,8 +121,8 @@ def show_emotion_graph(emotions, emotions_list, frames=None, images=None):
 
             #Text
 
-            columns[i].markdown(f"<p style=text-align:center;>You were <b>{round(emotions[emotion].mean()*100)}%</b> {emotion}.</p>", unsafe_allow_html=True)
-            columns[i].markdown(f"<p style=text-align:center;>Your most {emotion} face:</p>", unsafe_allow_html=True)
+            columns[i].markdown(f"<p style=text-align:left;>You were <b>{round(emotions[emotion].mean()*100)}%</b> {emotion}.</p>", unsafe_allow_html=True)
+            columns[i].markdown(f"<p style=text-align:left;>Your most {emotion} face:</p>", unsafe_allow_html=True)
 
 
             #Image
@@ -157,7 +157,7 @@ def show_emotion_graph_wo_photos(emotions):
                     strongest_emotions[j]=k
 
 
-    st.markdown(f"<p style=text-align:center;>You also seemed quite <b>{strongest_emotions[1]}</b> and <b>{strongest_emotions[2]}</b>.</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style=text-align:left;>You also seemed quite <b>{strongest_emotions[1]}</b> and <b>{strongest_emotions[2]}</b>.</p>", unsafe_allow_html=True)
     columns = st.columns(no_columns)
 
     #Displaying
@@ -207,6 +207,6 @@ def show_emotion_graph_wo_photos(emotions):
             columns[i].pyplot(fig)
 
             #Text
-            columns[i].markdown(f"<p style=text-align:center;>You were <b>{round(emotions[emotion].mean()*100)}%</b> {emotion}.</p>", unsafe_allow_html=True)
+            columns[i].markdown(f"<p style=text-align:left;>You were <b>{round(emotions[emotion].mean()*100)}%</b> {emotion}.</p>", unsafe_allow_html=True)
             #Next column
             i+=1
