@@ -10,7 +10,7 @@ from utils.db_queries import save_results, get_user_email
 
 
 resolution=48 #e.g.48 means that the resolution is (48,48,1)
-
+output_resolution = 200
 url_api_face_rec="https://jobpreprtest-lbzgzaglla-ew.a.run.app/predict" #API for analysing te facial expressions
 frame_rate=15 #If it's e.g.15, this means we analyse each 15th frame
 
@@ -46,7 +46,8 @@ def main():
                 frame_res=cv2.resize(frame_res, dsize=(resolution,resolution), interpolation=cv2.INTER_CUBIC)
                 emotion=requests.post(url_api_face_rec,json=json.dumps(frame_res.tolist())).json()[0]
                 emotions.append(emotion)
-                frames_as_list.append(frame.tolist())
+                frames_as_list.append(cv2.resize(frame,dsize=(output_resolution,output_resolution)).tolist()) #frames_as_list.append(frame.tolist())
+
 
             #Storing sentiment
             transcription, web_transcript = transcribe("record.mp3")
