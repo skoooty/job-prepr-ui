@@ -28,13 +28,15 @@ def main():
             "* Wait a couple of seconds for the result to be generated.",
             "* Once the result is generated, go to the **Result page**."
             ]
-    images = ['screenshots/open_interview.png',
-                'screenshots/area_selection.png',
-                'screenshots/start_stop.png',
-                'screenshots/video_recording.png',
-                'screenshots/report_ready.png',
-                'screenshots/open_result.png',
+
+    images = ['./images/screenshots/open_interview.png',
+                './images/screenshots/area_selection.png',
+                './images/screenshots/start_stop.png',
+                './images/screenshots/video_recording.png',
+                './images/screenshots/report_ready.png',
+                './images/screenshots/open_result.png',
               ]
+
     page = st.empty()
     col1, col2, col3 = st.columns([1,1,1])
 

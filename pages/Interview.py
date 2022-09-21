@@ -50,11 +50,6 @@ def main():
     else:
         logged_in=st.session_state["logged_in"]
 
-    #Button code
-    file_path=pathlib.Path(__file__).resolve().parent.parent.joinpath("styles", "main.css")
-    with open(file_path) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
     #Questions and area selection
     questions=load_questions()
     job_list = questions["Area"].unique()

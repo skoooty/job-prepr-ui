@@ -1,10 +1,8 @@
 import pandas as pd
 from random import randint
 
-interview_questions='interview_questions.csv'
-
 def load_questions():
-    questions = pd.read_csv(interview_questions,
+    questions = pd.read_csv('interview_questions.csv',
                             header=0,
                             names=["Area", "Question"],
                             on_bad_lines='skip',

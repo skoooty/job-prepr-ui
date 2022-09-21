@@ -27,18 +27,18 @@ def main():
             ]
 
     images =[
-            'tutorial_pics/too_many_people.jpg',
+            './images/tutorial_pics/too_many_people.jpg',
             '',
-            'tutorial_pics/far_away.jpg',
-            'tutorial_pics/two_people.jpg',
-            'tutorial_pics/good.jpg'
+            './images/tutorial_pics/far_away.jpg',
+            './images/tutorial_pics/two_people.jpg',
+            './images/tutorial_pics/good.jpg'
             ]
 
     text =[
         "❌ Find a quiet room. You don't want the voices in the background to disturb the algorithm. ❌",
         "",
         "❌ Make sure you are not too far away from the camera. ❌",
-        "❌ Make sure you are the only person visible on camera. The algoritham won't know which face to analyse otherwise. ❌",
+        "❌ Make sure you are the only person visible on camera. The algorithm won't know which face to analyse otherwise. ❌",
         "✅ Good! You're all set for the interview! ✅"
     ]
 
@@ -65,11 +65,11 @@ def main():
 
             columns = st.columns(2)
 
-            im = imageio.imread('tutorial_pics/too_dark.jpg')
+            im = imageio.imread('./images/tutorial_pics/too_dark.jpg')
             columns[0].image(im)
             columns[0].write("❌ Make sure there is enough light in the room. ❌")
 
-            im = imageio.imread('tutorial_pics/bad_light.jpg')
+            im = imageio.imread('./images/tutorial_pics/bad_light.jpg')
             columns[1].image(im)
             columns[1].write("❌ Make sure the source of light is in front of you, not behind. ❌")
         else:
