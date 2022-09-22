@@ -1,10 +1,10 @@
 ﻿## **Job Prepr - UI**
 
-The UI bit of Job Prepr, the platform that helps you prepare for your next job interview.
+The UI part of JobPrepr, the platform that helps you prepare for your next job interview.
 
 1. ### **Description**
 
-`	`This repo hosts the code for the front-end part of our application. We built it integrally with Streamlit (and added some of our own CSS), an open source Python framework. In order to be able to use the Webcam to capture audio and video, we integrated webrtc, a Streamlit plugin. We take the input from our audio and video and send it to out APIs (which are built in the repo Job Prepr Model, link at the end)
+`	`This repo hosts the code for the front-end part of our application. We built it with Streamlit (and added some of our own CSS), an open source Python framework. In order to be able to use the Webcam to capture audio and video, we integrated webrtc, a Streamlit plugin. We take the input from our audio and video and send it to out APIs (which are built in the repo Job Prepr Model, link at the end)
 
 1. ### **How to run this yourself**
 
@@ -32,8 +32,6 @@ Authors of this project:
 
 1. ### **Useful links**
 
-- The model bit: <https://github.com/skoooty/job-prepr-model>
+- The model part: <https://github.com/skoooty/job-prepr-model>
 - Streamlit: <https://streamlit.io/>
 - WebRTC: <https://blog.streamlit.io/how-to-build-the-streamlit-webrtc-component/>
-
-
